@@ -1,0 +1,126 @@
+[
+    {
+        "name": "ADIDAS NEO 10k BLK-WHT",
+        "brand": {
+          "name": "adidas",
+          "image":
+            "https://www.dropbox.com/scl/fi/kuut97qlikgbv2hiny4zz/adidass-150x150.png?rlkey=znic8u9t39niw82qv4vep2ql3&st=sqxofmea&raw=1"
+        },
+        "description": 
+        "Un look de running renace. Estas zapatillas fusionan lona prelavada con revestimientos de gamuza sobre su exterior.\nLas 3 Tiras en cuero sintético y un contrafuerte de talón grande en TPU le ponen el toque final al look.\n\n- Exterior de malla con revestimientos de gamuza.\n- Doble cordón.\n- Las 3 Tiras en cuero sintético.\n- Contrafuerte de talón grande en TPU; logo adidas en el parche de talón.\n- Plantilla Comfort; cómodo forro interno de tela.\n- Mediasuela troquelada de EVA brinda amortiguación y ligereza.\n- Suela de caucho."
+        ,
+        "sku": "AD-NEO10K-BLK",
+        "price": "120000",
+        "size": [ "38", "39", "40", "41", "42", "43" ],
+        "category": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/hlanq8ohduixxecz85f14/ADIDAS-NEO-10K-BLACK-1.png?rlkey=lo566dcmmpuj9uj4juw6vhvqz&st=o832xy4n&raw=1",
+          "https://www.dropbox.com/scl/fi/tlabws3a1s8akfwci82ih/ADIDAS-NEO-10K-BLACK-2.jpg?rlkey=ozfqplq1w56r3uj07knhbf0jc&st=74rg58r8&raw=1",
+          "https://www.dropbox.com/scl/fi/yf7ukqv8z26zgonofui0y/ADIDAS-NEO-10K-BLACK-3.jpg?rlkey=t4ep8hxggbnlp4mwzax1bp53i&st=wr7f6ahj&raw=1"
+        ]
+      },
+      {
+        "name": "ADIDAS NEO 10k PNK-WHT",
+        "brand": {
+          "name": "adidas",
+          "image":
+            "https://www.dropbox.com/scl/fi/kuut97qlikgbv2hiny4zz/adidass-150x150.png?rlkey=znic8u9t39niw82qv4vep2ql3&st=sqxofmea&raw=1"
+        },
+        "description": 
+        "Un look de running renace. Estas zapatillas fusionan lona prelavada con revestimientos de gamuza sobre su exterior.\nLas 3 Tiras en cuero sintético y un contrafuerte de talón grande en TPU le ponen el toque final al look.\n\n- Exterior de malla con revestimientos de gamuza.\n- Doble cordón.\n- Las 3 Tiras en cuero sintético.\n- Contrafuerte de talón grande en TPU; logo adidas en el parche de talón.\n- Plantilla Comfort; cómodo forro interno de tela.\n- Mediasuela troquelada de EVA brinda amortiguación y ligereza.\n- Suela de caucho."
+        ,
+        "sku": "AD-NEO10K-PNK",
+        "price": "120000",
+        "size": [ "38", "39", "40", "41", "42", "43" ],
+        "category": "mujer",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/6gtkdrksbkxatxygg9a9x/ADIDAS-NEO-10K-PINK-1.png?rlkey=t5nn89zd7fpuz4zdhlh13ja98&st=kdy955a0&raw=1",
+          "https://www.dropbox.com/scl/fi/57t0fyr1syri1opqh03gu/ADIDAS-NEO-10K-PINK-2.jpg?rlkey=bqf0damxvtemr1b8dlcoklz75&st=wfh68zfp&raw=1",
+          "https://www.dropbox.com/scl/fi/zuo2erqa3tbtgvczvpm8r/ADIDAS-NEO-10K-PINK-3.jpg?rlkey=ta37p1kx5lcurwt9chtdmdqfc&st=ias49xoy&raw=1"
+        ],
+        "discount": 10
+      },
+      {
+        "name": "NIKE AIR FORCE 01 VN WHT",
+        "brand": {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "El Air Force 1, que debutó en 1982 como un elemento imprescindible del basket, se convirtió en el número uno en los años 90. El look impecable del blanco sobre blanco clásico del AF1 triunfó tanto en la cancha como en la calle y en muchos sitios más. El Air Force 1, que encontró su ritmo en la cultura del hiphop con el lanzamiento de colaboraciones y combinaciones de colores limitadas, se convirtió en un calzado icónico en todo el mundo. Con más de 2,000 versiones, no puede negarse el impacto de este modelo básico en la moda, la música y la cultura del calzado deportivo.",
+        "sku": "NK-AIRF1-WTE",
+        "price": "300000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "category": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/7dokpk19c420gzwwrfc0s/NIKE-AIR-FORCE-01-VN-WHITE-1.png?rlkey=cd2oyx3qiehia0n3kw3winbip&st=1et6s7ty&raw=1",
+          "https://www.dropbox.com/scl/fi/bnuu3dpgsq9m51e827bw5/NIKE-AIR-FORCE-01-VN-WHITE-2.png?rlkey=x6x64lst21iekw0lzuuwc4pc0&st=ub9vqnfa&raw=1",
+          "https://www.dropbox.com/scl/fi/ptetw4x1nj5h5hy32n8c6/NIKE-AIR-FORCE-01-VN-WHITE-3.png?rlkey=gxehr2w9nwsdacgc99tcdso1z&st=0963kf58&raw=1"
+        ]
+      },
+      {
+        "name": "NIKE AIR FORCE 01 VN BLK-WHT",
+        "brand":  {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "El Air Force 1, que debutó en 1982 como un elemento imprescindible del basket, se convirtió en el número uno en los años 90. El look impecable del blanco sobre blanco clásico del AF1 triunfó tanto en la cancha como en la calle y en muchos sitios más. El Air Force 1, que encontró su ritmo en la cultura del hiphop con el lanzamiento de colaboraciones y combinaciones de colores limitadas, se convirtió en un calzado icónico en todo el mundo. Con más de 2,000 versiones, no puede negarse el impacto de este modelo básico en la moda, la música y la cultura del calzado deportivo.",
+        "sku": "NK-AIRF1-WYB",
+        "price": "300000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "category": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/wv41gvjtne126gxthu891/NIKE-AIR-FORCE-01-VN-WyB-1.png?rlkey=94il7840flnitu33ky4b13wio&st=g36b0ede&raw=1",
+          "https://www.dropbox.com/scl/fi/xpgoq32011v7w1v4krv7n/NIKE-AIR-FORCE-01-VN-WyB-2.png?rlkey=woaedahhtkhx9c3f2rz2yqlon&st=pdf6opet&raw=1",
+          "https://www.dropbox.com/scl/fi/e23l7fc731msk5bj3geum/NIKE-AIR-FORCE-01-VN-WyB-3.png?rlkey=mh9ftro7i4xgn7uikc37g6atm&st=2z0u4xdf&raw=1"
+        ]
+      },
+      {
+        "name": "NIKE AIR FORCE LV RED-WHT",
+        "brand":  {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "En 2022, 40 años desde la presentación del Air Force 1, se logró la culminación de la rica historia de la silueta con la introducción del Louis Vuitton x Nike “Air Force 1” de Virgil Abloh.\n\nPublicado póstumamente, el trabajo de Abloh conecta a la perfección las décadas de prominencia de las famosas zapatillas de Nike.\n\nEn total, Virgil Abloh diseñó 47 pares de Nike “Air Force 1” a medida para el desfile Primavera-Verano 2022 de Louis Vuitton en colaboración con Nike.\n\nPara distinguirlas de las Nike Air Force 1 originales, las zapatillas se fabricaron con materiales empleados en las colecciones masculinas de Louis Vuitton de Abloh y se diseñaron con sus comillas distintivas, haciéndose eco de los gráficos escritos que Abloh usó para adornar los zapatos.\n\nCada par fue fabricado por Louis Vuitton en Fiesso d'Artico, lo que marcó la primera vez que el modelo AF1 se fabricó fuera de una fábrica de Nike.\n\nEn enero de 2022, la primera entrega de las “Air Force 1” Louis Vuitton x Nike de Virgil Abloh llegó al mercado a través de Sotheby’s, con un total de 200 pares ofrecidos en una subasta en una combinación de colores exclusiva y un estuche piloto que los acompaña.\n\nEn junio de 2022 se lanzó un lanzamiento general de nueve pares adicionales.\n\nEsta colaboración entre Louis Vuitton y Nike ha dado como resultado algunas de las zapatillas de deporte más auténticas y de alta gama jamás creadas.\n\nLouis Vuitton x Nike Air Force 1 “Rojo”.\nParte superior de cuero rojo y blanco con detalles LV Monogram.\nMarca Louis Vuitton en el talón y la lengüeta.\nFabricado en Italia.\nNúmero de estilo: LD 0232.\nEste artículo es venta final y no es elegible para devolución.",
+        "sku": "NK-AIRFLV-RED",
+        "price": "200000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "category": "mujer",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/mp1hfrtmblhkt0g0stvio/NIKE-AIR-FORCE-LV-RED-1.png?rlkey=xqj5yi2evdw5n0pl55yeb6pkq&st=pfrapmf2&raw=1",
+          "https://www.dropbox.com/scl/fi/kji812fh2bxj5adzze5pl/NIKE-AIR-FORCE-LV-RED-2.png?rlkey=fbnfoxbfhv24a28v15obqk4mt&st=hhwywp7f&raw=1",
+          "https://www.dropbox.com/scl/fi/m74euy29ijjwd0sepmskg/NIKE-AIR-FORCE-LV-RED-3.png?rlkey=mis6eo4q32ihrbodcp6uyfcl4&st=lyl6i16n&raw=1"
+        ]
+      },
+      {
+        "name": "NIKE AIR FORCE LV WHT-BLK",
+        "brand": {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "En 2022, 40 años desde la presentación del Air Force 1, se logró la culminación de la rica historia de la silueta con la introducción del Louis Vuitton x Nike “Air Force 1” de Virgil Abloh.\n\nPublicado póstumamente, el trabajo de Abloh conecta a la perfección las décadas de prominencia de las famosas zapatillas de Nike.\n\nEn total, Virgil Abloh diseñó 47 pares de Nike “Air Force 1” a medida para el desfile Primavera-Verano 2022 de Louis Vuitton en colaboración con Nike.\n\nPara distinguirlas de las Nike Air Force 1 originales, las zapatillas se fabricaron con materiales empleados en las colecciones masculinas de Louis Vuitton de Abloh y se diseñaron con sus comillas distintivas, haciéndose eco de los gráficos escritos que Abloh usó para adornar los zapatos.\n\nCada par fue fabricado por Louis Vuitton en Fiesso d'Artico, lo que marcó la primera vez que el modelo AF1 se fabricó fuera de una fábrica de Nike.\n\nEn enero de 2022, la primera entrega de las “Air Force 1” Louis Vuitton x Nike de Virgil Abloh llegó al mercado a través de Sotheby’s, con un total de 200 pares ofrecidos en una subasta en una combinación de colores exclusiva y un estuche piloto que los acompaña.\n\nEn junio de 2022 se lanzó un lanzamiento general de nueve pares adicionales.\n\nEsta colaboración entre Louis Vuitton y Nike ha dado como resultado algunas de las zapatillas de deporte más auténticas y de alta gama jamás creadas.\n\nLouis Vuitton x Nike Air Force 1 “Rojo”.\nParte superior de cuero rojo y blanco con detalles LV Monogram.\nMarca Louis Vuitton en el talón y la lengüeta.\nFabricado en Italia.\nNúmero de estilo: LD 0232.\nEste artículo es venta final y no es elegible para devolución.",
+        "sku": "NK-AIRFLV-WYB",
+        "price": "200000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "category": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/0y6yj5i9umvs8dxemvhsu/NIKE-AIR-FORCE-LV-WyB-1.png?rlkey=w9cnzb1u3cvk8llx4jz8br030&st=ppyx7xsp&raw=1",
+          "https://www.dropbox.com/scl/fi/5i3ogb749uzbjofohrmfy/NIKE-AIR-FORCE-LV-WyB-2.png?rlkey=vi63s5h967atnywipvc0o1s03&st=ys9523jk&raw=1",
+          "https://www.dropbox.com/scl/fi/d91s0k3ce1q3dnlpg0ple/NIKE-AIR-FORCE-LV-WyB-3.png?rlkey=neh4qfkpv947b3pf39zkjguaf&st=km59gdql&raw=1"
+        ]
+      }
+    
+    ]
