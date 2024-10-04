@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: 'encrypted-tbn2.gstatic.com',
+            hostname: 'metropolitanhost.com',
           },
           {
             protocol: 'https',
