@@ -25,7 +25,11 @@ class UserController {
       res
         .setHeader("token", `${tokenWithUserData.token}`)
         .status(200)
-        .json({ message: "Login successfully", data: tokenWithUserData.user });
+        .json({
+          message: "Login successfully",
+          data: tokenWithUserData.user,
+          token: tokenWithUserData.token,
+        });
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "An unexpected error occurred";

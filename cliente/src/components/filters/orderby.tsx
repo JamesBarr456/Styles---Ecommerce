@@ -67,9 +67,5 @@ export default function Orderby() {
     // Here you would typically update your state or trigger a re-fetch of sorted data
   };
 
-  return (
-    <div className="flex items-center justify-center">
-      <SortingSelect onSortChange={handleSortChange} />
-    </div>
-  );
+  return <SortingSelect onSortChange={handleSortChange} />;
 }

@@ -1,9 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/nCRmRWrQ2kk
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 
 import Link from "next/link";
@@ -11,7 +5,7 @@ import { Logo } from "../logo/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-muted py-8 md:py-12">
+    <footer className="py-8 md:py-12 border-t border-gray-200">
       <div className="container mx-auto max-w-7xl grid grid-cols-1 justify-items-center sm:grid-cols-2 md:grid-cols-4 gap-8">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <Logo />

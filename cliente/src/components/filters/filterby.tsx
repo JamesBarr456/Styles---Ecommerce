@@ -24,7 +24,7 @@ import { useState } from "react";
 
 export const Filterby = () => {
   const { genres, sizes } = dataFilter;
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceRange, setPriceRange] = useState([0, 200000]);
   const handlePriceChange = (values: number[]) => {
     setPriceRange(values);
   };

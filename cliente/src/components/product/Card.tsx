@@ -17,7 +17,6 @@ interface Props {
 }
 
 export const CardProduct = ({ name, logo, img, price, discount }: Props) => {
-  const [logoLoaded, setLogoLoaded] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const hasDiscount = discount > 0;
@@ -34,15 +33,15 @@ export const CardProduct = ({ name, logo, img, price, discount }: Props) => {
       <Card className="w-full max-w-md mx-auto overflow-hidden group">
         <CardHeader className="grid grid-cols-2 items-center md:grid-cols-3 w-full p-3">
           <div className="relative h-11 w-11">
-            {!logoLoaded && (
-              <Skeleton className="absolute h-11 w-11 inset-0 z-10" />
-            )}
+            {!imageLoaded && <Skeleton className="absolute inset-0" />}
             <Image
               src={logo}
               alt={`${name} logo`}
               fill
-              className="object-cover"
-              onLoadingComplete={() => setLogoLoaded(true)}
+              className={`h-full w-full rounded-md object-contain transition-opacity duration-500 ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setImageLoaded(true)}
             />
           </div>
 
@@ -54,13 +53,16 @@ export const CardProduct = ({ name, logo, img, price, discount }: Props) => {
         </CardHeader>
         <CardContent className="p-3">
           <AspectRatio ratio={1 / 1} className="bg-muted">
-            {!imageLoaded && <Skeleton className="absolute inset-0 z-10" />}
+            {!imageLoaded && <Skeleton className="absolute inset-0" />}
+
             <Image
               src={img}
               alt={`${name} product image`}
               fill
-              className="h-full w-full rounded-md object-cover"
-              onLoadingComplete={() => setImageLoaded(true)}
+              className={`h-full w-full rounded-md object-cover transition-opacity duration-500 ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setImageLoaded(true)}
             />
           </AspectRatio>
         </CardContent>

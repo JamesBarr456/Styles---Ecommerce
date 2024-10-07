@@ -29,7 +29,8 @@ class UserService {
     const { email, password } = user;
     try {
       const isValidEmailUser = await getUserByEmail(email);
-      if (!isValidEmailUser) throw new Error(`Invalid Email`);
+      if (!isValidEmailUser)
+        throw new Error(`The email is incorrect or does not exist.`);
 
       const inValidPassword = await bcrypt.compare(
         password,

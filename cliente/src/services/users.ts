@@ -1,4 +1,4 @@
-import { ILogin, IRegister } from "@/app/interfaces/auth";
+import { ILogin, IRegister } from "@/interfaces/users";
 import axios, { AxiosError } from "axios";
 
 const url = "http://localhost:4000/api";
@@ -18,7 +18,9 @@ export const registerUser = async (newUser: IRegister) => {
 export const loginUser = async (user: ILogin) => {
   try {
     const response = await axios.post(`${url}/users/login`, user);
-    return response.data;
+    const token = response.data.token;
+    const data = response.data.data;
+    return { data, token };
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
       throw new Error(error.response.data.message);
