@@ -1,5 +1,6 @@
 import { IProduct } from "../types/IProduct";
 import { Product } from "../models/product.model";
+import mongoose from "mongoose";
 
 class ProductDao {
   async createProduct(data: IProduct) {
@@ -35,7 +36,9 @@ class ProductDao {
 
   async getProductById(productId: string) {
     try {
-      const product = await Product.findById(productId);
+      const product = await Product.findById(
+        new mongoose.Types.ObjectId(productId)
+      );
       return product;
     } catch (error) {
       throw Error((error as Error).message);

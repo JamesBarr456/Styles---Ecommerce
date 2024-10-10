@@ -3,22 +3,59 @@
 import { Button } from "../ui/button";
 import { IProduct } from "@/interfaces/product";
 import { QuantitySelector } from "../carrito/quantity";
+import { SessionCheckModal } from "../others/SessionCheckModal";
 import { ShoppingCart } from "lucide-react";
-import { addToCart } from "@/services/cart";
 import { cx } from "class-variance-authority";
+import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 import { useQuantity } from "@/hooks/useQuantity";
 import { useState } from "react";
 
 interface Props {
   product: IProduct;
-  sizes: string[] | number[];
+  sizes: number[];
 }
 
 export const SizeSelector = ({ sizes, product }: Props) => {
+  const { isAuthenticated, user } = useAuth();
+  const { addItemToCart } = useCart();
   const { decrement, increment, quantity } = useQuantity();
-  const [sizeSelect, setSizeSelect] = useState<string | number>("");
-  const handleSizeSelection = (size: string | number) => {
+  const [sizeSelect, setSizeSelect] = useState<number>(0);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleSizeSelection = (size: number) => {
     setSizeSelect(size);
+  };
+
+  const discount = product.discount > 0 ? 1 - product.discount / 100 : 1;
+  const total_price =
+    product.discount > 0
+      ? product.price * quantity * discount
+      : product.price * quantity;
+
+  const handleAddToCartOrLogin = async () => {
+    if (isAuthenticated) {
+      if (user && user._id) {
+        try {
+          const resp = await addItemToCart({
+            productId: product._id,
+            quantity: quantity,
+            userId: user._id,
+            size: sizeSelect,
+            total_mount: total_price,
+          });
+          console.log(resp);
+        } catch (error) {
+          if (error instanceof Error) {
+            console.log(error.message);
+          }
+        }
+      } else {
+        console.log("El usuario no tiene un ID válido.");
+      }
+    } else {
+      setOpenModal(true);
+    }
   };
 
   return (
@@ -48,13 +85,17 @@ export const SizeSelector = ({ sizes, product }: Props) => {
         />
         <div className="py-3 bg-orange rounded-md hover:brightness-110">
           <Button
-            onClick={() => addToCart(product, quantity, sizeSelect)}
-            disabled={!sizeSelect}
+            onClick={handleAddToCartOrLogin}
+            disabled={!sizeSelect || quantity === 0}
             className="bg-orange-500  p-7 rounded-xl hover:bg-orange-600 text-white transition-colors space-x-3 w-full"
           >
             <ShoppingCart size={22} />
             <p>Add to cart</p>
           </Button>
+          <SessionCheckModal
+            isOpen={openModal}
+            onClose={() => setOpenModal(false)}
+          />
         </div>
       </div>
     </>

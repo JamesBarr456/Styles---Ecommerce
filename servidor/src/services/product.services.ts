@@ -7,7 +7,7 @@ const {
   createProduct,
   deleteProduct,
   getAllProducts,
-  // getProductById,
+  getProductById,
   getProductByName,
   updateProduct,
 } = productDao;
@@ -40,14 +40,14 @@ class ProductServices {
     }
   }
 
-  // async getProduct(id: string) {
-  //   try {
-  //     const product = await getProductById(id);
-  //     return product;
-  //   } catch (error) {
-  //     throw Error((error as Error).message);
-  //   }
-  // }
+  async getProductById(id: string) {
+    try {
+      const product = await getProductById(id);
+      return product;
+    } catch (error) {
+      throw Error((error as Error).message);
+    }
+  }
 
   async getProduct(name: string) {
     try {

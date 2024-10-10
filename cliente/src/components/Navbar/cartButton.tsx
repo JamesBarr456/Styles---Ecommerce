@@ -1,7 +1,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetFooter,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
@@ -26,16 +25,12 @@ export const IconCart = () => {
         <SheetTitle>Carrito</SheetTitle>
         <Separator />
         <Carrito />
-        <SheetFooter>
-          <Separator className="my-3" />
-          <div className="flex justify-between w-full">
-            <p className="font-bold text-xl">Total</p>
-            <p className="font-bold text-xl">$79.999</p>
-          </div>
-          <Button variant="default" className="p-7 w-full mt-5">
-            <p>COMPRAR AHORA</p>
-          </Button>
-        </SheetFooter>
+        {/* {isAuthenticated && (
+          <SheetFooter>
+            <Separator className="my-3" />
+           
+          </SheetFooter>
+        )} */}
       </SheetContent>
     </Sheet>
   );

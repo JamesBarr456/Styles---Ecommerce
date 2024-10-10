@@ -1,47 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import { ICartItem } from "@/interfaces/cart";
+import { Button } from "../ui/button";
+import { EmptyCarrito } from "./empty";
 import { ItemCarrito } from "./itemCarrito";
 import { Separator } from "../ui/separator";
-import { getCartItems } from "@/services/cart";
+import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 export const Carrito = () => {
-  const [itemsCart, setItemsCart] = useState<ICartItem[]>([]);
+  const { user } = useAuth();
+  const { cartItems, removeItemFromCart, updateItemInCart } = useCart();
 
-  useEffect(() => {
-    const storedCart = getCartItems();
-    setItemsCart(storedCart);
-  }, []);
+  if (!user) throw new Error("El usuario no existe, vuelva a loguearse");
 
-  const handleRemoveItem = (productId: string) => {
-    const updatedCart = itemsCart.filter(
-      (item) => item.product._id !== productId
-    );
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    setItemsCart(updatedCart);
-  };
-  if (itemsCart.length === 0) {
-    return <p className="text-center">No hay productos agregados</p>;
+  if (!cartItems || cartItems.items.length === 0) {
+    return <EmptyCarrito />;
   }
 
   return (
-    <ul className="overflow-auto h-4/5">
-      {itemsCart.map((item, i) => (
-        <li key={i}>
-          <ItemCarrito
-            item={{
-              product: item.product,
-              quantity: item.quantity,
-              size: item.size,
-            }}
-            onRemove={handleRemoveItem}
-          />
-        </li>
-      ))}
+    <div className="h-full space-y-8">
+      <ul className="overflow-auto h-4/5">
+        {cartItems?.items.map((item, i) => (
+          <li key={i}>
+            <ItemCarrito
+              item={item}
+              userId={user._id}
+              handleTrash={removeItemFromCart}
+              handleUpdate={updateItemInCart}
+            />
+          </li>
+        ))}
 
-      <Separator className="my-1" />
-    </ul>
+        <Separator className="my-1" />
+      </ul>
+      <div className="flex justify-between w-full">
+        <p className="font-bold text-xl">Total</p>
+        <p className="font-bold text-xl">$79.999</p>
+      </div>
+      <Button variant="default" className="p-7 w-full mt-5">
+        <p>Finalizar Compra</p>
+      </Button>
+    </div>
   );
 };

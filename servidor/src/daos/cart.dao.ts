@@ -33,10 +33,16 @@ class CartDao {
     }
   }
 
-  async deleteCart(cardId: string) {
+  async deleteItem(cartId: string, itemId: string) {
     try {
-      const card = await Cart.findByIdAndDelete(cardId);
-      return card;
+      const newCart = await Cart.findByIdAndUpdate(
+        cartId,
+        {
+          $pull: { items: { _id: itemId } },
+        },
+        { new: true }
+      );
+      return newCart;
     } catch (error) {
       throw Error((error as Error).message);
     }

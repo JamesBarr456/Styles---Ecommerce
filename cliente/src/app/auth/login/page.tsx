@@ -20,7 +20,6 @@ import Link from "next/link";
 import { loginUser } from "@/services/users";
 import { useAuth } from "@/context/AuthContext";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -40,7 +39,6 @@ export default function RegistrationForm() {
 
   const { login } = useAuth();
 
-  const router = useRouter();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,7 +52,6 @@ export default function RegistrationForm() {
     try {
       const res = await loginUser(data);
       login(res.token, res.data);
-      router.push("/");
     } catch (error) {
       if (error instanceof Error) {
         setBackendError(error.message);

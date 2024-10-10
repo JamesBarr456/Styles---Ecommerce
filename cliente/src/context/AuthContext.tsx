@@ -15,7 +15,7 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const router = useRouter();
 
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const storedUser = localStorage.getItem("user");
     if (storedToken) {
-      setIsAuthenticated(storedToken);
+      setIsAuthenticated(true);
     }
 
     if (storedUser) {
@@ -35,10 +35,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = (newToken: string, userData: IUser) => {
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("token", newToken);
+    setIsAuthenticated(true);
+    setUser(userData);
+    router.push("/");
   };
 
   const logout = () => {
-    setIsAuthenticated(null);
+    setIsAuthenticated(false);
     setUser(null);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -46,9 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated: !!isAuthenticated, user, login, logout }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

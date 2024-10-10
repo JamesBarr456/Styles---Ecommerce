@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 
 import { cartServices } from "../services/cart.services";
 
-const { createCart, deleteCart, getCart, updateCart } = cartServices;
+const { createCart, deleteCartItem, getCart, updateCart, getCartByIdUser } =
+  cartServices;
 
 class CartController {
   async createCart(req: Request, res: Response) {
@@ -20,13 +21,14 @@ class CartController {
       return res.status(500).json({ error: errorMessage });
     }
   }
-  async deleteCart(req: Request, res: Response) {
+  async deleteCartItem(req: Request, res: Response) {
     const id = req.params.id;
+    const data = req.body;
     try {
-      const Cart = await deleteCart(id);
+      const newCart = await deleteCartItem(id, data);
       return res
         .status(200)
-        .json({ message: "Cart delete successfully", data: Cart });
+        .json({ message: "Item Cart delete successfully", data: newCart });
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "An unexpected error occurred";
@@ -54,6 +56,21 @@ class CartController {
     const id = req.params.id;
     try {
       const Cart = await getCart(id);
+      return res.status(200).json({
+        message: "The Cart was fetched successfully.",
+        data: Cart,
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "An unexpected error occurred";
+
+      return res.status(500).json({ error: errorMessage });
+    }
+  }
+  async getCartByIdUser(req: Request, res: Response) {
+    const id = req.params.id;
+    try {
+      const Cart = await getCartByIdUser(id);
       return res.status(200).json({
         message: "The Cart was fetched successfully.",
         data: Cart,

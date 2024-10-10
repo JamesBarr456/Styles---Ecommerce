@@ -66,7 +66,6 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function RegistrationForm() {
   const [backendError, setBackendError] = useState<string | null>(null);
-
   const router = useRouter();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),

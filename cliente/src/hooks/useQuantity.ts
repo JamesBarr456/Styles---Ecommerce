@@ -11,17 +11,17 @@ export function useQuantity({
   min = 0,
   max = 99,
 }: UseQuantityOptions = {}) {
-  const [quantity, setQuantity] = useState(initialQuantity);
+  const [quantity, setQuantity] = useState<number>(initialQuantity);
 
-  const increment = () => {
+  const increment: () => void = () => {
     setQuantity((prev) => (prev < max ? prev + 1 : prev));
   };
 
-  const decrement = () => {
+  const decrement: () => void = () => {
     setQuantity((prev) => (prev > min ? prev - 1 : prev));
   };
 
-  const resetQuantity = () => {
+  const resetQuantity: () => void = () => {
     setQuantity(initialQuantity);
   };
 

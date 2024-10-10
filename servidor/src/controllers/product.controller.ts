@@ -2,8 +2,14 @@ import { Request, Response } from "express";
 
 import { productService } from "../services/product.services";
 
-const { getProduct, getProducts, createProduct, deleteProduct, updateProduct } =
-  productService;
+const {
+  getProduct,
+  getProducts,
+  createProduct,
+  deleteProduct,
+  updateProduct,
+  getProductById,
+} = productService;
 
 class ProductController {
   async createProduct(req: Request, res: Response) {
@@ -66,21 +72,21 @@ class ProductController {
     }
   }
 
-  // async getProduct(req: Request, res: Response) {
-  //   const id = req.params.id;
-  //   try {
-  //     const product = await getProduct(id);
-  //     return res.status(200).json({
-  //       message: "The product was fetched successfully.",
-  //       data: product,
-  //     });
-  //   } catch (error) {
-  //     const errorMessage =
-  //       error instanceof Error ? error.message : "An unexpected error occurred";
+  async getProductById(req: Request, res: Response) {
+    const id = req.params.id;
+    try {
+      const product = await getProductById(id);
+      return res.status(200).json({
+        message: "The product was fetched successfully.",
+        data: product,
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "An unexpected error occurred";
 
-  //     return res.status(500).json({ error: errorMessage });
-  //   }
-  // }
+      return res.status(500).json({ error: errorMessage });
+    }
+  }
 
   async getProducts(req: Request, res: Response) {
     const searchQuery = req.query;

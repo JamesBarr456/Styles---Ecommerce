@@ -1,55 +1,66 @@
-import { ICartItem } from "@/interfaces/cart";
-import { IProduct } from "@/interfaces/product";
+import axios, { AxiosError } from "axios";
 
-export const addToCart = (
-  product: IProduct,
-  quantity: number,
-  size: number
-) => {
-  const cart: ICartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
+import { IItems } from "@/interfaces/cart";
 
-  const existingItem = cart.find((item) => item.product._id === product._id);
+const url = "http://localhost:4000/api";
 
-  if (existingItem) {
-    existingItem.quantity += quantity;
-  } else {
-    cart.push({ product, quantity, size: [size] });
+export const addToCartAPI = async (data: {
+  userId: string;
+  productId: string;
+  quantity: number;
+  size: number;
+  total_mount: number;
+}) => {
+  try {
+    const response = await axios.post(`${url}/carts/add`, data);
+    return response.data.data;
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to register. Please try again.");
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
 };
 
-export const getCartItems = () => {
-  return JSON.parse(localStorage.getItem("cart") || "[]");
+export const removeItemFromCartAPI = async (
+  userId: string,
+  data: { itemId: string }
+) => {
+  try {
+    const response = await axios.delete(`${url}/carts/delete/${userId}`, {
+      data,
+    });
+    return response.data.data;
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to register. Please try again.");
+  }
 };
 
-export const removeFromCart = (productId: string) => {
-  let cart: ICartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
-  cart = cart.filter((item) => item.product._id !== productId);
-  localStorage.setItem("cart", JSON.stringify(cart));
+export const getCartItemsAPI = async (userId: string) => {
+  try {
+    const response = await axios.get(`${url}/carts/user/${userId}`);
+    return response.data.data;
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to register. Please try again.");
+  }
 };
 
-//   // Limpiar carrito en localStorage
-//   export const clearCart = () => {
-//     localStorage.removeItem("cart");
-//   };
-
-//   // Sincronizar el carrito con el backend
-//   export const syncCartWithBackend = async (token: string) => {
-//     const cartItems = getCartItems();
-//     if (cartItems.length > 0) {
-//       try {
-//         await axios.post(
-//           `${process.env.NEXT_PUBLIC_API_URL}/cart/sync`,
-//           { items: cartItems },
-//           {
-//             headers: {
-//               Authorization: `Bearer ${token}`,
-//             }
-//           }
-//         );
-//         clearCart(); // Limpiar carrito de localStorage después de sincronizar
-//       } catch (error) {
-//         console.error("Error syncing cart with backend", error);
-//       }
-//     }
-//   };
+export const updateCartItemAPI = async (cartId: string, data: IItems) => {
+  try {
+    const response = await axios.put(`${url}/carts/update/${cartId}`, {
+      items: [data],
+    });
+    return response.data.data;
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to register. Please try again.");
+  }
+};
