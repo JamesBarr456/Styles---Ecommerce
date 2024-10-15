@@ -1,9 +1,16 @@
 import { Filterby } from "@/components/filters/filterby";
 import { GridProducts } from "@/components/product/grid-products";
 import Orderby from "@/components/filters/orderby";
-import { Paginations } from "@/components/pagination/pagination";
 
-export default function Products() {
+interface Props {
+  searchParams: {
+    page?: string;
+    genre?: string;
+    priceRange?: string;
+    size?: string;
+  };
+}
+export default function Products({ searchParams }: Props) {
   return (
     <main className="container mx-auto flex flex-col items-center gap-5 my-5">
       <h1 className="text-xl font-bold">Mejores Ofertas</h1>
@@ -17,8 +24,7 @@ export default function Products() {
         <div className="lg:col-span-1"></div>
         <div className="lg:col-span-1"></div>
       </div>
-      <GridProducts />
-      <Paginations />
+      <GridProducts querys={searchParams} />
     </main>
   );
 }

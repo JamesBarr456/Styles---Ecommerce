@@ -90,6 +90,7 @@ class ProductController {
 
   async getProducts(req: Request, res: Response) {
     const searchQuery = req.query;
+
     try {
       const products = await getProducts(searchQuery);
       return res

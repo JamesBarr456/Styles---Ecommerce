@@ -61,7 +61,7 @@ class ProductServices {
   async getProducts(searchParams: ISearchParams) {
     const {
       brand,
-      category,
+      genre,
       page = 1,
       priceRange,
       sort_by,
@@ -82,7 +82,7 @@ class ProductServices {
 
     try {
       const products = await getAllProducts(
-        category,
+        genre,
         brand,
         page,
         sort,

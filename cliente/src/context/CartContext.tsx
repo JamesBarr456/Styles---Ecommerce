@@ -54,6 +54,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           const resp = await getCartItemsAPI(user._id);
           setCartItems(resp);
           setLoading(false);
+        } else {
+          setCartItems(null);
         }
       } catch (error) {
         console.error("Error fetching cart:", error);

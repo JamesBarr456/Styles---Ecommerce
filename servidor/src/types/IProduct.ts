@@ -6,7 +6,7 @@ export type SortBy =
   | "alpha_descending"
   | "created_descending"
   | "created_ascending";
-type Category = "hombre" | "mujer" | "kids";
+type Genre = "hombre" | "mujer" | "kids";
 
 export interface IProduct {
   _id: string; // Identificador único del producto
@@ -17,7 +17,7 @@ export interface IProduct {
   price: number; // Precio de la zapatilla
   size: number[]; // Tallas disponibles
   color: string[]; // Colores disponibles
-  category: Category; // Categoría a la que pertenece
+  genre: Genre; // Categoría a la que pertenece
   stock: number; // Cantidad disponible en inventario
   images: string[]; // URLs de las imágenes del producto
   discount?: number; // Descuento en porcentaje, opcional
@@ -27,7 +27,7 @@ export interface IProduct {
 }
 
 export interface ISearchParams {
-  category?: string;
+  genre?: string;
   brand?: string;
   sort_by?: SortBy;
   priceRange?: string;

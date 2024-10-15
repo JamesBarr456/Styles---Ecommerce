@@ -17,7 +17,7 @@ userRouter.get("/:id", getUser);
 
 userRouter.get("/", getUsers);
 
-userRouter.get("/delete/:id", deleteUser);
+userRouter.delete("/delete/:id", deleteUser);
 
 userRouter.put("/update/:id", updateUser);
 

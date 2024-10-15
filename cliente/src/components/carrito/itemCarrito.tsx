@@ -94,7 +94,7 @@ export const ItemCarrito = ({
 
             <div className="text-center">
               <h4 className="text-gray-400 text-sm">Total</h4>
-              <p className="font-bold">${total_mount}</p>
+              <p className="font-bold">${total_mount.toLocaleString()}</p>
             </div>
           </div>
         </div>

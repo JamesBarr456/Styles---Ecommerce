@@ -12,7 +12,7 @@
         "sku": "AD-NEO10K-BLK",
         "price": "120000",
         "size": [ "38", "39", "40", "41", "42", "43" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/hlanq8ohduixxecz85f14/ADIDAS-NEO-10K-BLACK-1.png?rlkey=lo566dcmmpuj9uj4juw6vhvqz&st=o832xy4n&raw=1",
@@ -33,7 +33,7 @@
         "sku": "AD-NEO10K-PNK",
         "price": "120000",
         "size": [ "38", "39", "40", "41", "42", "43" ],
-        "category": "mujer",
+        "genre": "mujer",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/6gtkdrksbkxatxygg9a9x/ADIDAS-NEO-10K-PINK-1.png?rlkey=t5nn89zd7fpuz4zdhlh13ja98&st=kdy955a0&raw=1",
@@ -54,7 +54,7 @@
         "sku": "NK-AIRF1-WTE",
         "price": "300000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/7dokpk19c420gzwwrfc0s/NIKE-AIR-FORCE-01-VN-WHITE-1.png?rlkey=cd2oyx3qiehia0n3kw3winbip&st=1et6s7ty&raw=1",
@@ -74,7 +74,7 @@
         "sku": "NK-AIRF1-WYB",
         "price": "300000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/wv41gvjtne126gxthu891/NIKE-AIR-FORCE-01-VN-WyB-1.png?rlkey=94il7840flnitu33ky4b13wio&st=g36b0ede&raw=1",
@@ -94,7 +94,7 @@
         "sku": "NK-AIRFLV-RED",
         "price": "200000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "mujer",
+        "genre": "mujer",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/mp1hfrtmblhkt0g0stvio/NIKE-AIR-FORCE-LV-RED-1.png?rlkey=xqj5yi2evdw5n0pl55yeb6pkq&st=pfrapmf2&raw=1",
@@ -114,7 +114,7 @@
         "sku": "NK-AIRFLV-WYB",
         "price": "200000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/0y6yj5i9umvs8dxemvhsu/NIKE-AIR-FORCE-LV-WyB-1.png?rlkey=w9cnzb1u3cvk8llx4jz8br030&st=ppyx7xsp&raw=1",
@@ -134,7 +134,7 @@
         "sku": "NK-JOR4R-CRE",
         "price": "200000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "mujer",
+        "genre": "mujer",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/wvk62wdhwiaw6fp32gb2e/NIKE-JORDAN-4-RETRO-CREMA-1.png?rlkey=enwo0onl5mz93wh5jx9tbbgwr&st=c87idnid&raw=1",
@@ -155,7 +155,7 @@
         "sku": "NK-JOR4R-CEL",
         "price": "200000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/pe9xn7qgn31u4sn2cznni/NIKE-JORDAN-4-RETRO-CELESTE-1.png?rlkey=pekh3qudj1hjk0iw4u2lovz4b&st=2tnvmdax&raw=1",
@@ -177,7 +177,7 @@
         "sku": "NK-PEGASUS-BYB",
         "price": "122000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/gwhd07raxvd6enm2s8i10/NIKE-PEGASUS-BLACK-BLUE-1.png?rlkey=bdspawu8bchrnyv6j9th57d6i&st=079cblrm&raw=1",
@@ -198,7 +198,7 @@
         "sku": "NK-PEGASUS-GYP",
         "price": "122000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "mujer",
+        "genre": "mujer",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/isq6gpu29wshoqznohd9j/NIKE-PEGASUS-GRAY-PINK-1.png?rlkey=ygo39ggzngmq34up9mvwqviru&st=hjpjq0kc&raw=1",
@@ -219,7 +219,7 @@
         "sku": "47SMA0050",
         "price": "205000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/ra9uu9ldwmss0dqin675t/Court-Cage-de-Cuero-_1_.png?rlkey=1qm4gcv95su9qbnnh8gtwjjqo&st=vnldqdl1&raw=1",
@@ -241,7 +241,7 @@
         "sku": "LCS-ACECLIP-GYW",
         "price": "240000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/sqrht6z3sh1tj54kpqwnh/Aceclip-De-Cuero-GRN-WHT-_1_.png?rlkey=eytks9yqwz05u22dfhvrsu0ie&st=q9yxw3b2&raw=1",

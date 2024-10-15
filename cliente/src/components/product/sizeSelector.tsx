@@ -10,6 +10,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { useQuantity } from "@/hooks/useQuantity";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface Props {
   product: IProduct;
@@ -22,6 +23,7 @@ export const SizeSelector = ({ sizes, product }: Props) => {
   const { decrement, increment, quantity } = useQuantity();
   const [sizeSelect, setSizeSelect] = useState<number>(0);
   const [openModal, setOpenModal] = useState(false);
+  const { toast } = useToast();
 
   const handleSizeSelection = (size: number) => {
     setSizeSelect(size);
@@ -45,9 +47,22 @@ export const SizeSelector = ({ sizes, product }: Props) => {
             total_mount: total_price,
           });
           console.log(resp);
+          // Show success toast
+          toast({
+            title: "¡Producto agregado al carrito! 🛒",
+            description: `Se agregó ${quantity} ${
+              quantity > 1 ? "unidades" : "unidad"
+            } de ${product.name}`,
+          });
         } catch (error) {
           if (error instanceof Error) {
             console.log(error.message);
+            // Show error toast
+            toast({
+              title: "Error",
+              description: "No se pudo agregar el producto al carrito.",
+              variant: "destructive",
+            });
           }
         }
       } else {

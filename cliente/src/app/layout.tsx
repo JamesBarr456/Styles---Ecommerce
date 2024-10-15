@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
 import Navbar from "../components/navbar/index";
+import { Toaster } from "@/components/ui/toaster";
 import localFont from "next/font/local";
 
 const geistSans = localFont({
@@ -37,6 +38,7 @@ export default function RootLayout({
           <CartProvider>
             <Navbar />
             {children}
+            <Toaster />
             <Footer />
           </CartProvider>
         </AuthProvider>

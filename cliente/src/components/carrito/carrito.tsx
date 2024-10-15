@@ -11,11 +11,15 @@ export const Carrito = () => {
   const { user } = useAuth();
   const { cartItems, removeItemFromCart, updateItemInCart } = useCart();
 
-  if (!user) throw new Error("El usuario no existe, vuelva a loguearse");
-
   if (!cartItems || cartItems.items.length === 0) {
     return <EmptyCarrito />;
   }
+
+  const price_total = cartItems.items.reduce((acc, item) => {
+    return acc + item.total_mount;
+  }, 0);
+
+  if (!user) throw new Error("El usuario no existe, vuelva a loguearse");
 
   return (
     <div className="h-full space-y-8">
@@ -35,7 +39,7 @@ export const Carrito = () => {
       </ul>
       <div className="flex justify-between w-full">
         <p className="font-bold text-xl">Total</p>
-        <p className="font-bold text-xl">$79.999</p>
+        <p className="font-bold text-xl">${price_total.toLocaleString()}</p>
       </div>
       <Button variant="default" className="p-7 w-full mt-5">
         <p>Finalizar Compra</p>

@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const sortingOptions = [
   { key: "price_ascending", label: "Precio: Menor a Mayor" },
@@ -22,24 +23,28 @@ const sortingOptions = [
 ];
 
 interface SortingSelectProps {
-  onSortChange?: (sortKey: string) => void;
   defaultValue?: string;
 }
 
 function SortingSelect({
-  onSortChange,
-  defaultValue = sortingOptions[1].key,
+  defaultValue = sortingOptions[0].key,
 }: SortingSelectProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const handleValueChange = (value: string) => {
-    if (onSortChange) {
-      onSortChange(value);
-    } else {
-      console.log("Sorting option changed:", value);
-    }
+    const params = new URLSearchParams(searchParams);
+
+    params.set("sort_by", value);
+
+    router.push(`${pathname}?${params.toString()}`);
   };
 
+  const selectedSort = searchParams.get("sort_by") || defaultValue;
+
   return (
-    <Select onValueChange={handleValueChange} defaultValue={defaultValue}>
+    <Select onValueChange={handleValueChange} defaultValue={selectedSort}>
       <SelectTrigger className="w-full rounded-xl border-none shadow-md">
         <SelectValue placeholder="Seleccionar orden" />
       </SelectTrigger>
@@ -62,10 +67,5 @@ function SortingSelect({
 }
 
 export default function Orderby() {
-  const handleSortChange = (sortKey: string) => {
-    console.log("New sorting key:", sortKey);
-    // Here you would typically update your state or trigger a re-fetch of sorted data
-  };
-
-  return <SortingSelect onSortChange={handleSortChange} />;
+  return <SortingSelect />;
 }

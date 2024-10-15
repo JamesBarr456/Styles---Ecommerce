@@ -13,7 +13,7 @@ export interface IProduct {
   stock: number;
   images: string[];
   discount: number;
-  category: string;
+  genre: string;
   status: string;
   createdAt: string;
   updatedAt: string;

@@ -20,7 +20,7 @@ productRouter.get("/:id", getProductById);
 
 productRouter.get("/", getProducts);
 
-productRouter.get("/delete/:id", deleteProduct);
+productRouter.delete("/delete/:id", deleteProduct);
 
 productRouter.put("/update/:id", updateProduct);
 

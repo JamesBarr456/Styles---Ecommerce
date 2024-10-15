@@ -40,7 +40,7 @@ class CartController {
     const id = req.params.id;
     const data = req.body;
     try {
-      const Cart = await updateCart(id, data);
+      const Cart = await updateCart(id, data.items);
       return res
         .status(200)
         .json({ message: "Cart update successfully", data: Cart });

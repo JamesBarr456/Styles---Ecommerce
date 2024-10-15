@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 type CardStatus = "active" | "completed";
 export interface IItems {
+  _id?: string;
   productId: mongoose.Types.ObjectId | string;
   quantity: number;
   size: number;

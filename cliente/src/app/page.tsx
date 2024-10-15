@@ -18,7 +18,7 @@ export default function Home() {
       <h2 className="font-bold text-xl text-blue uppercase">
         Nuestro Catálogo
       </h2>
-      <div className="w-full grid grid-cols-2 justify-items-center px-5 gap-3">
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:flex lg:justify-evenly justify-items-center px-5 gap-3">
         {marcas.map((marca, i) => (
           <Image
             key={i}
