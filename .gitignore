@@ -13,15 +13,15 @@ build/
 logs/
 
 # production
-cliente/build
+/cliente/build
 
-# next.js
-cliente/.next
-cliente/out/
+# next.js.
+/cliente/out/
+/cliente/.next/
 
 # vercel
 cliente/.vercel
 
 # typescript
 *.tsbuildinfo
-cliente/next-env.d.ts
+/cliente/next-env.d.ts
