@@ -1,6 +1,6 @@
 # E-commerce de Zapatillas
 
-Este proyecto es un sistema de e-commerce enfocado en la venta de zapatillas. El sistema está dividido en dos partes principales: el servidor y el cliente. 
+Este proyecto es un sistema de e-commerce enfocado en la venta de zapatillas. El sistema está dividido en dos partes principales: el servidor y el cliente.
 
 ## Descripción del Proyecto
 
@@ -52,10 +52,22 @@ El cliente está desarrollado utilizando **Next.js** (versión 14 o superior). L
 
 4. Configura las variables de entorno creando un archivo `.env` en la raíz del proyecto del servidor. Asegúrate de incluir variables como `PORT`, `DB_URL`, y `TOKEN_SECRET`.
 
-5. Inicia el servidor:
+5. **Inicia MongoDB** ejecutando el siguiente comando en una terminal separada:
 
     ```bash
-    npm start
+    mongod
+    ```
+
+6. **Carga los datos iniciales** (semillas) en la base de datos:
+
+    ```bash
+    npm run seed
+    ```
+
+7. **Inicia el servidor**:
+
+    ```bash
+    npm run dev
     ```
 
 ### Configuración del Front end
