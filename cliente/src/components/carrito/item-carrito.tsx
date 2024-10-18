@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
-
 import { Button } from "../ui/button";
 import { IItems } from "@/interfaces/cart";
-import { IProduct } from "@/interfaces/product";
 import Image from "next/image";
 import { QuantitySelector } from "./quantity";
 import { Trash } from "lucide-react";
-import { getProductById } from "@/services/products";
+import { useEffect } from "react";
 import { useQuantity } from "@/hooks/useQuantity";
 
 interface Props {
@@ -17,7 +14,16 @@ interface Props {
 }
 
 export const ItemCarrito = ({
-  item: { _id, productId, quantity: quantity_product, size, total_mount },
+  item: {
+    _id,
+    productId,
+    quantity: quantity_product,
+    size,
+    total_mount,
+    image,
+    name,
+    price,
+  },
   handleTrash,
   handleUpdate,
   userId,
@@ -26,44 +32,28 @@ export const ItemCarrito = ({
     initialQuantity: quantity_product,
   });
 
-  const [product, setProduct] = useState<IProduct | null>(null);
-
   useEffect(() => {
-    async function getItem() {
-      const res = await getProductById(productId);
-      setProduct(res);
+    if (quantity_product === quantity) {
+      return;
     }
-    getItem();
-  }, [productId]);
-
-  useEffect(() => {
-    if (!product) return;
-    const discount = product.discount > 0 ? 1 - product.discount / 100 : 1;
     const data = {
       _id,
       size,
       quantity,
-      productId: product._id,
-      total_mount: product.price * discount * quantity,
+      productId,
+      total_mount,
+      image,
+      name,
+      price,
     };
 
     handleUpdate(data);
   }, [quantity]);
 
-  if (!product) return <p>No vino nada fijate</p>;
-
-  const handleIncrement = () => {
-    increment();
-  };
-
-  const handleDecrement = () => {
-    decrement();
-  };
-
   return (
     <>
       <div className="w-full flex justify-between items-center transition-all">
-        <h1 className="text-lg truncate font-semibold">{product.name}</h1>
+        <h1 className="text-lg truncate font-semibold">{name}</h1>
         <Button
           onClick={() => handleTrash(userId, _id)}
           variant="ghost"
@@ -76,25 +66,28 @@ export const ItemCarrito = ({
       <div className="grid grid-cols-3">
         <div className="relative h-24 w-24 col-span-1 ">
           <Image
-            src={product.images[0]}
-            alt={product.name}
+            src={image}
+            alt={name}
             fill
             className="object-cover border  rounded-xl shadow-md"
           />
         </div>
-        <div className="col-span-2 space-y-3">
-          <p className="text-xs">Size: {size}</p>
-          <p className="text-xs">SKU: {product.sku}</p>
+        <div className="col-span-2 space-y-3 my-auto">
+          <p className="font-semibold text-muted-foreground">Size: {size}</p>
           <div className="grid grid-cols-2">
             <QuantitySelector
-              onDecrement={handleDecrement}
-              onIncrement={handleIncrement}
+              onDecrement={decrement}
+              onIncrement={increment}
               quantity={quantity}
             />
 
             <div className="text-center">
-              <h4 className="text-gray-400 text-sm">Total</h4>
-              <p className="font-bold">${total_mount.toLocaleString()}</p>
+              <h4 className="text-muted-foreground font-semibold text-sm">
+                Total
+              </h4>
+              <p className="font-bold text-lg">
+                ${total_mount.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>

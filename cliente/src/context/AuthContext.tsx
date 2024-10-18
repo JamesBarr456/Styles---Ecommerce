@@ -2,6 +2,7 @@
 
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 
+import Cookies from "js-cookie";
 import { IUser } from "@/interfaces/users";
 import { useRouter } from "next/navigation";
 
@@ -20,21 +21,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
+    const storedToken = Cookies.get("token");
+    const storedUser = Cookies.get("user");
 
-    const storedUser = localStorage.getItem("user");
     if (storedToken) {
       setIsAuthenticated(true);
     }
 
     if (storedUser) {
-      setUser(JSON.parse(storedUser)); // Parsea el usuario desde JSON
+      setUser(JSON.parse(storedUser));
     }
   }, []);
 
   const login = (newToken: string, userData: IUser) => {
-    localStorage.setItem("user", JSON.stringify(userData));
-    localStorage.setItem("token", newToken);
+    Cookies.set("token", newToken, { expires: 1 });
+    Cookies.set("user", JSON.stringify(userData), { expires: 1 });
+
     setIsAuthenticated(true);
     setUser(userData);
     router.push("/");
@@ -43,8 +45,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setIsAuthenticated(false);
     setUser(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    Cookies.remove("token");
+    Cookies.remove("user");
     router.push("/auth/login");
   };
 

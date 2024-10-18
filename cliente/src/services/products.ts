@@ -8,8 +8,10 @@ interface QueryParams {
   sort?: string;
   priceRange?: string;
   size?: string;
+  page?: string;
 }
 export const getProducts = async (queryParams?: QueryParams) => {
+  console.log(queryParams);
   try {
     const response = await axios.get(`${url}/products`, {
       params: queryParams,

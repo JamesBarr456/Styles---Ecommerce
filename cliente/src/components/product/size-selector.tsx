@@ -3,7 +3,7 @@
 import { Button } from "../ui/button";
 import { IProduct } from "@/interfaces/product";
 import { QuantitySelector } from "../carrito/quantity";
-import { SessionCheckModal } from "../others/SessionCheckModal";
+import { SessionCheckModal } from "../others/session-check-modal";
 import { ShoppingCart } from "lucide-react";
 import { cx } from "class-variance-authority";
 import { useAuth } from "@/context/AuthContext";
@@ -14,10 +14,9 @@ import { useToast } from "@/hooks/use-toast";
 
 interface Props {
   product: IProduct;
-  sizes: number[];
 }
 
-export const SizeSelector = ({ sizes, product }: Props) => {
+export const SizeSelector = ({ product }: Props) => {
   const { isAuthenticated, user } = useAuth();
   const { addItemToCart } = useCart();
   const { decrement, increment, quantity } = useQuantity();
@@ -29,25 +28,19 @@ export const SizeSelector = ({ sizes, product }: Props) => {
     setSizeSelect(size);
   };
 
-  const discount = product.discount > 0 ? 1 - product.discount / 100 : 1;
-  const total_price =
-    product.discount > 0
-      ? product.price * quantity * discount
-      : product.price * quantity;
-
   const handleAddToCartOrLogin = async () => {
     if (isAuthenticated) {
-      if (user && user._id) {
+      if (user?._id) {
         try {
-          const resp = await addItemToCart({
+          const data = {
+            userId: user._id,
             productId: product._id,
             quantity: quantity,
-            userId: user._id,
             size: sizeSelect,
-            total_mount: total_price,
-          });
-          console.log(resp);
-          // Show success toast
+          };
+
+          await addItemToCart(data);
+
           toast({
             title: "¡Producto agregado al carrito! 🛒",
             description: `Se agregó ${quantity} ${
@@ -56,8 +49,8 @@ export const SizeSelector = ({ sizes, product }: Props) => {
           });
         } catch (error) {
           if (error instanceof Error) {
-            console.log(error.message);
-            // Show error toast
+            console.error(error.message);
+
             toast({
               title: "Error",
               description: "No se pudo agregar el producto al carrito.",
@@ -66,7 +59,7 @@ export const SizeSelector = ({ sizes, product }: Props) => {
           }
         }
       } else {
-        console.log("El usuario no tiene un ID válido.");
+        throw new Error("El usuario no tiene un ID válido.");
       }
     } else {
       setOpenModal(true);
@@ -77,7 +70,7 @@ export const SizeSelector = ({ sizes, product }: Props) => {
     <>
       <p>Seleccionar talle argentino</p>
       <div className="flex flex-wrap gap-2">
-        {sizes.map((size, i) => (
+        {product.size.map((size, i) => (
           <Button
             key={i}
             onClick={() => handleSizeSelection(size)}

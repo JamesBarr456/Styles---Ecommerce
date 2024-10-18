@@ -9,7 +9,6 @@ export const addToCartAPI = async (data: {
   productId: string;
   quantity: number;
   size: number;
-  total_mount: number;
 }) => {
   try {
     const response = await axios.post(`${url}/carts/add`, data);
@@ -53,9 +52,28 @@ export const getCartItemsAPI = async (userId: string) => {
 
 export const updateCartItemAPI = async (cartId: string, data: IItems) => {
   try {
+    console.log("actualizar", data);
     const response = await axios.put(`${url}/carts/update/${cartId}`, {
       items: data,
     });
+    console.log(response);
+    return response.data.data;
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to register. Please try again.");
+  }
+};
+
+export const updateDiscountPromo = async (cartId: string, data: number) => {
+  try {
+    const response = await axios.put(
+      `${url}/carts/update/discountPromo/${cartId}`,
+      {
+        discount: data,
+      }
+    );
     return response.data.data;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {

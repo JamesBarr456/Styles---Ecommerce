@@ -22,7 +22,6 @@ interface ProductContextType {
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  //   const { user } = useAuth();
   const [productItems, setProductItems] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

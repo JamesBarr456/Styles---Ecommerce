@@ -14,14 +14,30 @@ const cartSchema = new Schema<ICart>(
         productId: {
           type: Schema.Types.ObjectId,
           ref: "Product",
-          required: true, //
+          required: true,
+        },
+        sku: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        image: {
+          type: String,
+          required: true,
         },
         quantity: {
           type: Number,
           required: true,
         },
         size: {
-          type: String,
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
           required: true,
         },
         total_mount: {
@@ -30,6 +46,15 @@ const cartSchema = new Schema<ICart>(
         },
       },
     ],
+    total_amount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    promoCodeDiscount: {
+      type: Number,
+      default: 0,
+    },
     status: {
       type: String,
       enum: ["active", "completed"],

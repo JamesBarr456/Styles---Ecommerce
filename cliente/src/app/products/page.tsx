@@ -24,6 +24,7 @@ export default function Products({ searchParams }: Props) {
         <div className="lg:col-span-1"></div>
         <div className="lg:col-span-1"></div>
       </div>
+
       <GridProducts querys={searchParams} />
     </main>
   );

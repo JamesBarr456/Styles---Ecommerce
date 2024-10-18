@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/interfaces/users";
-import Loading from "@/components/others/Loading";
+import Loading from "@/components/others/loading";
 
 export const UserContent = () => {
   const [users, setUsers] = useState<IUser[] | null>(null);

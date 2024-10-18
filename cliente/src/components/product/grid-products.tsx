@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import { CardProduct } from "./Card";
-import { IProduct } from "@/interfaces/product";
-import Loading from "../others/Loading";
+import { CardProduct } from "./card";
+import { GetAllProductsResponse } from "@/interfaces/product";
+import { GridProductsSkeleton } from "../skeletons/grid-products-skeleton";
 import { Paginations } from "../pagination/pagination";
 import { getProducts } from "@/services/products";
 
@@ -16,15 +16,10 @@ interface Props {
     size?: string;
   };
 }
-interface GetAllProductsResponse {
-  products: IProduct[];
-  totalPages: number;
-  totalProducts: number;
-}
+
 export const GridProducts = ({ querys }: Props) => {
   const [products, setProducts] = useState<GetAllProductsResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getProductsApi = async () => {
@@ -33,8 +28,7 @@ export const GridProducts = ({ querys }: Props) => {
         const response = await getProducts(querys);
         setProducts(response);
       } catch (error) {
-        setError("Error al cargar los productos");
-        console.log(error);
+        if (error instanceof Error) throw new Error(error.message);
       } finally {
         setLoading(false);
       }
@@ -42,24 +36,27 @@ export const GridProducts = ({ querys }: Props) => {
     getProductsApi();
   }, [querys]);
 
-  if (loading) return <Loading />;
-  if (error) return <p>{error}</p>;
-  if (!products) return <p>No se encontraron productos</p>;
+  if (loading) {
+    return <GridProductsSkeleton />;
+  }
+
   return (
-    <section className="flex flex-col px-3 gap-6 w-full">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
-        {products.products.map((product, i) => (
-          <CardProduct
-            key={i}
-            discount={product.discount}
-            img={product.images[0]}
-            logo={product.brand.image}
-            name={product.name}
-            price={product.price}
-          />
-        ))}
-      </div>
-      <Paginations totalPages={products.totalPages} />
-    </section>
+    <>
+      <section className="flex flex-col px-3 gap-6 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
+          {products?.products.map((product, i) => (
+            <CardProduct
+              key={i}
+              discount={product.discount}
+              img={product.images[0]}
+              logo={product.brand.image}
+              name={product.name}
+              price={product.price}
+            />
+          ))}
+        </div>
+        <Paginations totalPages={products?.totalPages || 1} />
+      </section>
+    </>
   );
 };

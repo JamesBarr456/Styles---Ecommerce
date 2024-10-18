@@ -1,8 +1,8 @@
-import { IconCart } from "./cartButton";
+import { IconCart } from "./cart-button";
 import Link from "next/link";
-import { Logo } from "../logo/Logo";
+import { Logo } from "../logo/logo";
 import { Sidebar } from "./sidebar";
-import { UserButton } from "./userButton";
+import { UserButton } from "./user-button";
 
 const links = [
   {
@@ -19,14 +19,10 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="container mx-auto flex h-16 w-full items-center justify-between px-5">
-        {/* Sidebar Section */}
-
         <Sidebar />
 
-        {/* Logo Section */}
         <Logo />
 
-        {/* Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {links.map((link, i) => (
             <Link
@@ -40,8 +36,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* User Actions */}
-        <div className="flex items-center">
+        <div className="flex items-center gap-5">
           <UserButton />
           <IconCart />
         </div>

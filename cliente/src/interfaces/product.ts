@@ -19,3 +19,9 @@ export interface IProduct {
   updatedAt: string;
   brand: Brand;
 }
+
+export interface GetAllProductsResponse {
+  products: IProduct[];
+  totalPages: number;
+  totalProducts: number;
+}

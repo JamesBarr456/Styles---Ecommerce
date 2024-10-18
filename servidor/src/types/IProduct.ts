@@ -20,7 +20,7 @@ export interface IProduct {
   genre: Genre; // Categoría a la que pertenece
   stock: number; // Cantidad disponible en inventario
   images: string[]; // URLs de las imágenes del producto
-  discount?: number; // Descuento en porcentaje, opcional
+  discount: number; // Descuento en porcentaje, opcional
   status: ProductStatus; // Estado del producto
   createdAt: Date; // Fecha de creación del producto
   updatedAt: Date; // Fecha de la última actualización

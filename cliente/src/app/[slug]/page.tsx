@@ -10,7 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { IProduct } from "@/interfaces/product";
 import Image from "next/image";
-import { SizeSelector } from "@/components/product/sizeSelector";
+import NotFound from "../not-found";
+import { SizeSelector } from "@/components/product/size-selector";
 import { getProduct } from "@/services/products";
 
 interface Props {
@@ -25,12 +26,9 @@ export default async function Detail({ params }: Props) {
 
   const product: IProduct = await getProduct(slug);
 
-  if (!product) {
-    return <p>Producto no encontrado</p>;
-  }
+  if (!product) return <NotFound />;
 
-  const { discount, images, price, brand, name, size, sku, description } =
-    product;
+  const { discount, images, price, brand, name, sku, description } = product;
 
   const newPrice = discount > 0 ? price * (1 - discount / 100) : price;
 
@@ -97,7 +95,7 @@ export default async function Detail({ params }: Props) {
           )}
         </div>
 
-        <SizeSelector product={product} sizes={size} />
+        <SizeSelector product={product} />
       </div>
     </main>
   );

@@ -17,14 +17,6 @@ import {
 
 import { useAuth } from "./AuthContext";
 
-interface CartItemData {
-  userId: string;
-  productId: string;
-  quantity: number;
-  size: number;
-  total_mount: number;
-}
-
 interface CartContextType {
   cartItems: ICartItem | null;
   loading: boolean;
@@ -33,7 +25,6 @@ interface CartContextType {
     productId: string;
     quantity: number;
     size: number;
-    total_mount: number;
   }) => Promise<void>;
   updateItemInCart: (data: IItems) => Promise<void>;
   removeItemFromCart: (userId: string, itemId: string) => Promise<void>;
@@ -65,8 +56,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     fetchCart();
   }, [user]);
 
-  const addItemToCart = async (data: CartItemData) => {
+  const addItemToCart = async (data: {
+    userId: string;
+    productId: string;
+    quantity: number;
+    size: number;
+  }) => {
     try {
+      console.log("guardare BD:", data);
       const response = await addToCartAPI(data);
       setCartItems(response);
     } catch (error) {
@@ -74,11 +71,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // Función para actualizar la cantidad
   const updateItemInCart = async (data: IItems) => {
     try {
       if (cartItems) {
         const response = await updateCartItemAPI(cartItems._id, data);
+
         setCartItems(response);
       }
     } catch (error) {
@@ -86,7 +83,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // Función para eliminar un ítem del carrito
   const removeItemFromCart = async (userId: string, itemId: string) => {
     try {
       const response = await removeItemFromCartAPI(userId, { itemId });

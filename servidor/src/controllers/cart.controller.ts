@@ -2,8 +2,14 @@ import { Request, Response } from "express";
 
 import { cartServices } from "../services/cart.services";
 
-const { createCart, deleteCartItem, getCart, updateCart, getCartByIdUser } =
-  cartServices;
+const {
+  createCart,
+  deleteCartItem,
+  getCart,
+  updateCart,
+  getCartByIdUser,
+  updateCartDiscountPromo,
+} = cartServices;
 
 class CartController {
   async createCart(req: Request, res: Response) {
@@ -41,6 +47,21 @@ class CartController {
     const data = req.body;
     try {
       const Cart = await updateCart(id, data.items);
+      return res
+        .status(200)
+        .json({ message: "Cart update successfully", data: Cart });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "An unexpected error occurred";
+
+      return res.status(500).json({ error: errorMessage });
+    }
+  }
+  async updateCartDiscountPromo(req: Request, res: Response) {
+    const id = req.params.id;
+    const data = req.body;
+    try {
+      const Cart = await updateCartDiscountPromo(id, data.discount);
       return res
         .status(200)
         .json({ message: "Cart update successfully", data: Cart });

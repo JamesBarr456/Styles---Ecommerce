@@ -1,8 +1,9 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   CircleUserRound,
+  LayoutDashboard,
   LogOut,
   UserCircle,
   UserRoundCheck,
@@ -14,15 +15,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Label } from "../ui/label";
 import Link from "next/link";
+import { Skeleton } from "../ui/skeleton";
 import { useAuth } from "@/context/AuthContext";
-import { useState } from "react";
 
 export function UserButton() {
   const { logout, user, isAuthenticated } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSignOut = () => {
@@ -36,17 +47,28 @@ export function UserButton() {
           variant="ghost"
           className="h-10 p-2 rounded-full hover:bg-orange-50 hover:text-orange-500"
         >
-          {isAuthenticated && user ? ( // Verifica si el usuario está autenticado y si existe
-            user.avatar && user.avatar.trim() !== "" ? ( // Verifica si el avatar no es un string vacío
-              <Avatar className="h-8 w-8">
+          {isLoading ? (
+            <Skeleton className="h-6 w-6 rounded-full" />
+          ) : isAuthenticated && user ? (
+            user.avatar && user.avatar.trim() !== "" ? (
+              <Avatar className="h-6 w-6 relative">
                 <AvatarImage src={user.avatar} alt={user.first_name} />
-                <AvatarFallback>{user.first_name}</AvatarFallback>
+                <Label
+                  htmlFor="welcome"
+                  className="absolute bottom-0 left-0 -translate-x-1/3 translate-y-full text-xs text-orange-500"
+                >{`Welcome ${user.first_name}!`}</Label>
               </Avatar>
             ) : (
-              <UserRoundCheck /> // Muestra el icono de Lucide si el avatar está vacío
+              <div className="relative">
+                <UserRoundCheck className="h-6 w-6" />
+                <Label
+                  htmlFor="welcome"
+                  className="absolute bottom-0 left-0 -translate-x-1/3 capitalize translate-y-full text-xs text-orange-500"
+                >{`hi! ${user.first_name}`}</Label>
+              </div>
             )
           ) : (
-            <CircleUserRound /> // Muestra este icono si no hay usuario autenticado
+            <CircleUserRound className="h-6 w-6" />
           )}
         </Button>
       </DropdownMenuTrigger>
@@ -60,6 +82,18 @@ export function UserButton() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+            {user && user.status === "admin" && (
+              <>
+                <DropdownMenuItem asChild>
+                  <Link href="/admin" className="flex items-center">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    <span>Dashboard</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </>
+            )}
+
             <DropdownMenuItem
               onClick={handleSignOut}
               className="flex items-center text-red-600"

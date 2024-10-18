@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/sheet";
 
 import { Carrito } from "../carrito/carrito";
-import CartWithBadge from "../others/CartWithBadge";
+import CartWithBadge from "../others/cart-with-badge";
 import { Separator } from "../ui/separator";
 
 export const IconCart = () => {

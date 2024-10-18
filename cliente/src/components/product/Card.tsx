@@ -1,12 +1,8 @@
-"use client";
-
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 
 import { AspectRatio } from "../ui/aspect-ratio";
 import Image from "next/image";
 import Link from "next/link";
-import { Skeleton } from "../ui/skeleton";
-import { useState } from "react";
 
 interface Props {
   name: string;
@@ -17,8 +13,6 @@ interface Props {
 }
 
 export const CardProduct = ({ name, logo, img, price, discount }: Props) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
   const hasDiscount = discount > 0;
   const productPriceWithDiscount = hasDiscount
     ? price * (1 - discount / 100)
@@ -33,15 +27,12 @@ export const CardProduct = ({ name, logo, img, price, discount }: Props) => {
       <Card className="w-full max-w-md mx-auto overflow-hidden group">
         <CardHeader className="grid grid-cols-2 items-center md:grid-cols-3 w-full p-3">
           <div className="relative h-11 w-11">
-            {!imageLoaded && <Skeleton className="absolute inset-0" />}
             <Image
               src={logo}
               alt={`${name} logo`}
               fill
-              className={`h-full w-full rounded-md object-contain transition-opacity duration-500 ${
-                imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
-              onLoad={() => setImageLoaded(true)}
+              sizes="(min-width: 768px) 40vw, 70vw"
+              className="h-full w-full rounded-md object-contain"
             />
           </div>
 
@@ -53,16 +44,13 @@ export const CardProduct = ({ name, logo, img, price, discount }: Props) => {
         </CardHeader>
         <CardContent className="p-3">
           <AspectRatio ratio={1 / 1} className="bg-muted">
-            {!imageLoaded && <Skeleton className="absolute inset-0" />}
-
             <Image
               src={img}
               alt={`${name} product image`}
               fill
-              className={`h-full w-full rounded-md object-cover transition-opacity duration-500 ${
-                imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
-              onLoad={() => setImageLoaded(true)}
+              sizes="(min-width: 768px) 40vw, 70vw"
+              className={`h-full w-full rounded-md object-cover`}
+              priority
             />
           </AspectRatio>
         </CardContent>

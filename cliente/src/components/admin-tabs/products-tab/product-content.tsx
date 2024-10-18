@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { GetAllProductsResponse, IProduct } from "@/interfaces/product";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import {
   Table,
@@ -17,6 +18,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   addProductToApi,
   deleteProductById,
   getProducts,
@@ -25,27 +32,31 @@ import {
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { IProduct } from "@/interfaces/product";
 import Image from "next/image";
-import Loading from "@/components/others/Loading";
+import Loading from "@/components/others/loading";
 import { Paginations } from "@/components/pagination/pagination";
 import { ProductForm } from "./product-form";
 
-interface GetAllProductsResponse {
-  products: IProduct[];
-  totalPages: number;
-  totalProducts: number;
+// import { useRouter } from "next/navigation";
+
+interface Props {
+  querys: {
+    page?: string;
+  };
 }
-export const ProductContent = () => {
+
+export const ProductContent = ({ querys }: Props) => {
   const [products, setProducts] = useState<GetAllProductsResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // const router = useRouter()
 
   useEffect(() => {
     const getProductsApi = async () => {
       setLoading(true);
       try {
-        const response = await getProducts();
+        const response = await getProducts(querys);
         setProducts(response);
       } catch (error) {
         setError("Error al cargar los productos");
@@ -55,7 +66,7 @@ export const ProductContent = () => {
       }
     };
     getProductsApi();
-  }, []);
+  }, [querys]);
 
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
@@ -133,33 +144,48 @@ export const ProductContent = () => {
               <TableCell>{product.status}</TableCell>
               <TableCell>
                 <div className="flex space-x-2">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        // onClick={() => setSelectedProduct(product)}
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="overflow-auto h-3/4">
-                      <DialogHeader>
-                        <DialogTitle>Edit Product</DialogTitle>
-                      </DialogHeader>
-                      <ProductForm
-                        onUpdate={handleUpdateProduct}
-                        initData={product}
-                      />
-                    </DialogContent>
-                  </Dialog>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => handleDeleteProduct(product._id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <TooltipProvider>
+                    <Dialog>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" size="icon">
+                              <Pencil className="h-4 w-4" />
+                            </Button>
+                          </DialogTrigger>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Edit Product</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <DialogContent className="overflow-auto h-3/4">
+                        <DialogHeader>
+                          <DialogTitle>Edit Product</DialogTitle>
+                        </DialogHeader>
+                        <ProductForm
+                          onUpdate={handleUpdateProduct}
+                          initData={product}
+                        />
+                      </DialogContent>
+                    </Dialog>
+                  </TooltipProvider>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => handleDeleteProduct(product._id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Delete Product</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
               </TableCell>
             </TableRow>

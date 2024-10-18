@@ -1,10 +1,15 @@
 import { Package, Users } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { ProductContent } from "@/components/components_admin/products/product-content";
-import { UserContent } from "@/components/components_admin/users/usert-content";
+import { ProductContent } from "@/components/admin-tabs/products-tab/product-content";
+import { UserContent } from "@/components/admin-tabs/users-tab/usert-content";
 
-export default function Admin() {
+interface Props {
+  searchParams: {
+    page?: string;
+  };
+}
+export default function Admin({ searchParams }: Props) {
   return (
     <div className="container  mx-auto p-4 ">
       <Tabs defaultValue="products">
@@ -20,7 +25,7 @@ export default function Admin() {
         </TabsList>
 
         <TabsContent value="products" className="mt-10 space-y-5">
-          <ProductContent />
+          <ProductContent querys={searchParams} />
         </TabsContent>
 
         <TabsContent value="users" className="mt-10">
