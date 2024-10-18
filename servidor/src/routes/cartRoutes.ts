@@ -10,11 +10,14 @@ const {
   updateCart,
   getCartByIdUser,
   updateCartDiscountPromo,
+  getAllCartByUser,
 } = cartController;
 
 cartRouter.post("/add", createCart);
 
 cartRouter.get("/:id", getCart);
+
+cartRouter.get("/allUser/:id", getAllCartByUser);
 
 cartRouter.get("/user/:id", getCartByIdUser);
 

@@ -63,7 +63,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     size: number;
   }) => {
     try {
-      console.log("guardare BD:", data);
       const response = await addToCartAPI(data);
       setCartItems(response);
     } catch (error) {

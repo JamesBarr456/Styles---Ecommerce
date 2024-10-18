@@ -57,7 +57,24 @@ export const deleteUser = async (id: string) => {
 export const putUser = async (id: string, data: Partial<IUser>) => {
   try {
     const response = await axios.put(`${url}/users/update/${id}`, {
-      data: data,
+      data,
+    });
+    return response.data.data;
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to login. Please try again.");
+  }
+};
+
+export const putPasswordUser = async (
+  id: string,
+  data: { currentPassword: string; newPassword: string }
+) => {
+  try {
+    const response = await axios.put(`${url}/users/update/password/${id}`, {
+      data,
     });
     return response.data.data;
   } catch (error) {

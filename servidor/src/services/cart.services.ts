@@ -3,7 +3,13 @@ import { ICart, IItems } from "../types/ICart";
 import { Product } from "../models/product.model";
 import { cartDao } from "../daos/cart.dao";
 
-const { addCart, getCartById, updateCart, getCartByIdAndStatus } = cartDao;
+const {
+  addCart,
+  getCartById,
+  updateCart,
+  getCartByIdAndStatus,
+  getAllCartUser,
+} = cartDao;
 
 class CartServices {
   async createCart(data: {
@@ -153,6 +159,14 @@ class CartServices {
     }
   }
 
+  async getAllCartByUser(id: string) {
+    try {
+      const cart = await getAllCartUser(id);
+      return cart;
+    } catch (error) {
+      throw Error((error as Error).message);
+    }
+  }
   async getCartByIdUser(id: string) {
     try {
       const cart = await getCartByIdAndStatus(id);

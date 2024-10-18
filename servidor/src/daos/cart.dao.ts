@@ -41,6 +41,15 @@ class CartDao {
       throw Error((error as Error).message);
     }
   }
+
+  async getAllCartUser(userId: string) {
+    try {
+      const cart = await Cart.find({ userId });
+      return cart;
+    } catch (error) {
+      throw Error((error as Error).message);
+    }
+  }
 }
 
 export const cartDao = new CartDao();

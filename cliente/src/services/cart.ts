@@ -82,3 +82,15 @@ export const updateDiscountPromo = async (cartId: string, data: number) => {
     throw new Error("Failed to register. Please try again.");
   }
 };
+
+export const getAllCartByUserAPI = async (userId: string) => {
+  try {
+    const response = await axios.get(`${url}/carts/allUser/${userId}`);
+    return response.data.data;
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to register. Please try again.");
+  }
+};

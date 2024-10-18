@@ -4,13 +4,17 @@ import React, { ReactNode, createContext, useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
 import { IUser } from "@/interfaces/users";
+import { putUser } from "@/services/users";
 import { useRouter } from "next/navigation";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
   user: IUser | null;
+  loading: boolean;
   login: (newToken: string, userData: IUser) => void;
   logout: () => void;
+  update: (id: string, data: Partial<IUser>) => void;
+  updatePassword: (data: IUser) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -18,6 +22,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,6 +36,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+
+    setLoading(false);
   }, []);
 
   const login = (newToken: string, userData: IUser) => {
@@ -50,8 +57,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     router.push("/auth/login");
   };
 
+  const update = async (id: string, data: Partial<IUser>) => {
+    try {
+      const updatedUser = await putUser(id, data);
+      setUser(updatedUser);
+      Cookies.set("user", JSON.stringify(updatedUser), { expires: 1 });
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  };
+  const updatePassword = (data: IUser) => {
+    setUser(data);
+    Cookies.set("user", JSON.stringify(data), { expires: 1 });
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        user,
+        loading,
+        login,
+        logout,
+        update,
+        updatePassword,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

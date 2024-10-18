@@ -16,4 +16,6 @@ export interface ICartItem {
   total_amount: number;
   promoCodeDiscount: number;
   status: string;
+  updatedAt: Date;
+  createdAt: Date;
 }

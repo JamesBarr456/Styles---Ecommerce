@@ -90,6 +90,31 @@ class UserService {
       throw Error((error as Error).message);
     }
   }
+  async updatePasswordUser(
+    id: string,
+    currentPassword: string,
+    newPassword: string
+  ) {
+    try {
+      const user = await getUserById(id);
+      if (!user) throw new Error("User no exist or is incorrect");
+
+      const isPasswordValid = await bcrypt.compare(
+        currentPassword,
+        user.password
+      );
+      if (!isPasswordValid) {
+        throw new Error("Current password is incorrect.");
+      }
+      const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+      const updatedUser = await updateUserById(id, {
+        password: hashedNewPassword,
+      });
+      return updatedUser;
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
 }
 
 export const userService = new UserService();
