@@ -6,22 +6,24 @@ import { UserButton } from "./user-button";
 
 const links = [
   {
-    url: "home",
+    url: "inicio",
     path: "/",
   },
   {
-    url: "sneakers",
+    url: "productos",
     path: "/products",
   },
 ];
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white">
+    <header className="sticky top-0 z-50 w-full border-b bg-white font-poppins">
       <div className="container mx-auto flex h-16 w-full items-center justify-between px-5">
         <Sidebar />
 
-        <Logo />
+        <Link href={"/"}>
+          <Logo />
+        </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {links.map((link, i) => (

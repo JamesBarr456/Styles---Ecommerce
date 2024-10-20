@@ -33,7 +33,7 @@ export default async function Detail({ params }: Props) {
   const newPrice = discount > 0 ? price * (1 - discount / 100) : price;
 
   return (
-    <main className="container grid grid-cols-1 md:grid-cols-2 justify-items-center md:items-center p-5 gap-5">
+    <main className="container font-poppins grid grid-cols-1 md:grid-cols-2 justify-items-center md:items-center p-5 gap-5">
       <Carousel
         opts={{
           align: "start",
@@ -48,6 +48,7 @@ export default async function Detail({ params }: Props) {
                   src={image}
                   alt={`product image`}
                   fill
+                  sizes="(min-width: 768px) 40vw, 70vw"
                   className="object-contain"
                 />
               </div>
@@ -64,6 +65,7 @@ export default async function Detail({ params }: Props) {
               src={brand.image}
               alt={`${name} logo`}
               fill
+              sizes="(min-width: 768px) 40vw, 70vw"
               className="object-contain"
             />
           </div>

@@ -50,7 +50,7 @@ export const ProductCategoryGrid = ({
       <h2 className="text-3xl  uppercase font-semibold text-orange-400">
         {title}
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 w-full ">
         {products.products.map((product, i) => (
           <CardProduct
             key={i}

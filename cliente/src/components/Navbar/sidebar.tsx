@@ -2,11 +2,14 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Logo } from "../logo/logo";
 import { Menu } from "lucide-react";
 
 export const Sidebar = () => {
@@ -18,12 +21,15 @@ export const Sidebar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="md:hidden bg-white">
-        <div className="grid gap-4 p-4">
+        <SheetTitle>
+          <Logo />
+        </SheetTitle>
+        <SheetDescription />
+        <div className="grid space-y-6 mt-7 p-4">
           <SheetClose asChild>
             <Link
               href="/"
               className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              prefetch={false}
             >
               Home
             </Link>
@@ -33,9 +39,8 @@ export const Sidebar = () => {
             <Link
               href="/products"
               className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              prefetch={false}
             >
-              Sneakers
+              Productos
             </Link>
           </SheetClose>
         </div>

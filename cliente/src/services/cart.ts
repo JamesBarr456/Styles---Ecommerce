@@ -50,13 +50,15 @@ export const getCartItemsAPI = async (userId: string) => {
   }
 };
 
-export const updateCartItemAPI = async (cartId: string, data: IItems) => {
+export const updateCartItemAPI = async (
+  cartId: string,
+  data: Partial<IItems>
+) => {
   try {
-    console.log("actualizar", data);
     const response = await axios.put(`${url}/carts/update/${cartId}`, {
       items: data,
     });
-    console.log(response);
+
     return response.data.data;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {

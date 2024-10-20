@@ -18,7 +18,6 @@ import {
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Label } from "../ui/label";
 import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
 import { useAuth } from "@/context/AuthContext";
@@ -44,35 +43,28 @@ export function UserButton() {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button
+          size={"icon"}
           variant="ghost"
-          className="h-10 p-2 rounded-full hover:bg-orange-50 hover:text-orange-500"
+          className="  rounded-full hover:bg-orange-50 hover:text-orange-500"
         >
           {isLoading ? (
-            <Skeleton className="h-6 w-6 rounded-full" />
+            <Skeleton className="h-7 w-7 rounded-full" />
           ) : isAuthenticated && user ? (
             user.avatar && user.avatar.trim() !== "" ? (
-              <Avatar className="h-6 w-6 relative">
+              <Avatar className="h-7 w-7 relative">
                 <AvatarImage src={user.avatar} alt={user.first_name} />
-                <Label
-                  htmlFor="welcome"
-                  className="absolute bottom-0 left-0 -translate-x-1/3 translate-y-full text-xs text-orange-500"
-                >{`Welcome ${user.first_name}!`}</Label>
               </Avatar>
             ) : (
               <div className="relative">
-                <UserRoundCheck className="h-6 w-6" />
-                <Label
-                  htmlFor="welcome"
-                  className="absolute bottom-0 left-0 -translate-x-1/3 capitalize translate-y-full text-xs text-orange-500"
-                >{`hi! ${user.first_name}`}</Label>
+                <UserRoundCheck size={27} />
               </div>
             )
           ) : (
-            <CircleUserRound className="h-6 w-6" />
+            <CircleUserRound size={27} />
           )}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40" align="end" forceMount>
+      <DropdownMenuContent className="w-40 font-poppins" align="end" forceMount>
         {isAuthenticated ? (
           <>
             <DropdownMenuItem asChild>

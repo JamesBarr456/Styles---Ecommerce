@@ -7,7 +7,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="lg:container lg:mx-auto">
+    <main className="lg:container lg:mx-auto font-poppins">
       <div className="relative ">
         <Image
           src={calzado}

@@ -28,7 +28,6 @@ const Slider = React.forwardRef(
     const [localValues, setLocalValues] = useState(initialValue);
 
     useEffect(() => {
-      // Update localValues when the external value prop changes
       setLocalValues(Array.isArray(value) ? value : [min, max]);
     }, [min, max, value]);
 
@@ -54,7 +53,7 @@ const Slider = React.forwardRef(
         {...props}
       >
         <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20">
-          <SliderPrimitive.Range className="absolute h-full bg-orange-500 rounded-full" />
+          <SliderPrimitive.Range className="absolute h-full bg-black rounded-full" />
         </SliderPrimitive.Track>
         {localValues.map((value, index) => (
           <React.Fragment key={index}>

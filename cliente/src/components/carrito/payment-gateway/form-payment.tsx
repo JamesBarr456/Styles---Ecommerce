@@ -38,7 +38,7 @@ const formSchema = z.object({
     areaCode: z
       .string()
       .min(2, { message: "Code must be at least 2 digits" })
-      .max(4, { message: "Code can't exceed 4 digits" })
+      .max(5, { message: "Code can't exceed 4 digits" })
       .regex(numberRegex, "Code must contain only numbers"),
     number: z
       .string()
@@ -91,17 +91,22 @@ export const PaymentFormSteps = () => {
       expirationDate: "",
       cvv: "",
     },
+    mode: "onChange",
   });
+
+  const isFormValid = form.formState.isValid;
 
   if (!cartItems) return <PaymentSkeleton />;
 
   const isCartEmpty = !cartItems || cartItems.items.length === 0;
 
   const onSubmit = (data: FormData) => {
-    if (isCartEmpty) {
+    if (isCartEmpty || !isFormValid) {
       toast({
-        title: "Carrito vacío",
-        description: "No puedes realizar un pago con el carrito vacío.",
+        title: isCartEmpty ? "Carrito vacío" : "Formulario incompleto",
+        description: isCartEmpty
+          ? "No puedes realizar un pago con el carrito vacío."
+          : "Por favor, completa todos los campos requeridos.",
         variant: "destructive",
       });
       return;
@@ -133,6 +138,26 @@ export const PaymentFormSteps = () => {
     });
   };
 
+  const handleTabChange = (value: string) => {
+    setActiveStep(value);
+  };
+
+  const handleNextStep = () => {
+    if (activeStep === "personal") {
+      setActiveStep("envio");
+    } else if (activeStep === "envio") {
+      setActiveStep("pago");
+    }
+  };
+
+  const handlePreviousStep = () => {
+    if (activeStep === "pago") {
+      setActiveStep("envio");
+    } else if (activeStep === "envio") {
+      setActiveStep("personal");
+    }
+  };
+
   return (
     <Card className="col-span-2">
       <CardHeader>
@@ -145,14 +170,14 @@ export const PaymentFormSteps = () => {
             <p className="mb-4">
               No puedes realizar un pago con el carrito vacío.
             </p>
-            <Button>
-              <Link href={"/products"}>Volver a la Tienda</Link>
+            <Button asChild>
+              <Link href="/products">Volver a la Tienda</Link>
             </Button>
           </div>
         ) : (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <Tabs value={activeStep} onValueChange={setActiveStep}>
+              <Tabs value={activeStep} onValueChange={handleTabChange}>
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger
                     value="personal"
@@ -393,9 +418,26 @@ export const PaymentFormSteps = () => {
                   </div>
                 </TabsContent>
               </Tabs>
-              <Button type="submit" className="w-full">
-                {activeStep === "pago" ? "Realizar Pago" : "Siguiente"}
-              </Button>
+              <div className="flex justify-between">
+                {activeStep !== "personal" && (
+                  <Button type="button" onClick={handlePreviousStep}>
+                    Anterior
+                  </Button>
+                )}
+                {activeStep !== "pago" ? (
+                  <Button
+                    type="button"
+                    onClick={handleNextStep}
+                    className={activeStep === "personal" ? "ml-auto" : ""}
+                  >
+                    Siguiente
+                  </Button>
+                ) : (
+                  <Button type="submit" disabled={!isFormValid}>
+                    Realizar Pago
+                  </Button>
+                )}
+              </div>
             </form>
           </Form>
         )}

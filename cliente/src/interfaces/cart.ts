@@ -6,6 +6,7 @@ export interface IItems {
   quantity: number;
   size: number;
   price: number;
+  sku: string;
   total_mount: number;
 }
 

@@ -26,7 +26,7 @@ interface CartContextType {
     quantity: number;
     size: number;
   }) => Promise<void>;
-  updateItemInCart: (data: IItems) => Promise<void>;
+  updateItemInCart: (data: Partial<IItems>) => Promise<void>;
   removeItemFromCart: (userId: string, itemId: string) => Promise<void>;
 }
 
@@ -70,7 +70,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const updateItemInCart = async (data: IItems) => {
+  const updateItemInCart = async (data: Partial<IItems>) => {
     try {
       if (cartItems) {
         const response = await updateCartItemAPI(cartItems._id, data);

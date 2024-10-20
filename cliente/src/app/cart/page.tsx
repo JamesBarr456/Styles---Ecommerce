@@ -3,7 +3,7 @@ import { PaymentFormSteps } from "@/components/carrito/payment-gateway/form-paym
 
 export default function PasarelaPagosEstructurada() {
   return (
-    <div className="container mx-auto my-20 flex flex-col lg:grid lg:grid-cols-3 gap-8 p-4">
+    <div className="container font-poppins mx-auto my-20 flex flex-col lg:grid lg:grid-cols-3 gap-8 p-4">
       <OrderSummary />
       <PaymentFormSteps />
     </div>

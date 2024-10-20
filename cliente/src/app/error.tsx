@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center  bg-slate-100">
+    <div className="w-full h-screen flex flex-col items-center justify-center  bg-slate-100 font-poppins">
       <svg
         className="w-1/2 md:w-1/3 lg:w-1/4 text-blue-600"
         xmlns="http://www.w3.org/2000/svg"

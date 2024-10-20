@@ -12,17 +12,16 @@ interface Props {
 }
 export default function Products({ searchParams }: Props) {
   return (
-    <main className="container mx-auto flex flex-col items-center gap-5 my-5">
+    <main className="container font-poppins mx-auto flex flex-col items-center gap-5 my-5">
       <h1 className="text-xl font-bold">Mejores Ofertas</h1>
-      <div className="grid grid-cols-2 w-full lg:grid-cols-4 xl:grid-cols-8 lg:gap-5 px-5 ">
-        <div className="lg:col-span-1 lg:order-3 xl:col-span-2">
+
+      <div className="flex w-full gap-7">
+        <div className="w-48">
           <Orderby />
         </div>
-        <div className="lg:col-span-1 lg:order-4 xl:col-span-2">
+        <div className="w-48">
           <Filterby />
         </div>
-        <div className="lg:col-span-1"></div>
-        <div className="lg:col-span-1"></div>
       </div>
 
       <GridProducts querys={searchParams} />

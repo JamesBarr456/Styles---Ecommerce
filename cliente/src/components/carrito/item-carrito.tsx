@@ -10,7 +10,7 @@ interface Props {
   item: IItems;
   userId: string;
   handleTrash: (userId: string, itemId: string) => void;
-  handleUpdate: (data: IItems) => void;
+  handleUpdate: (data: Partial<IItems>) => void;
 }
 
 export const ItemCarrito = ({
@@ -21,8 +21,8 @@ export const ItemCarrito = ({
     size,
     total_mount,
     image,
+    sku,
     name,
-    price,
   },
   handleTrash,
   handleUpdate,
@@ -38,13 +38,8 @@ export const ItemCarrito = ({
     }
     const data = {
       _id,
-      size,
       quantity,
       productId,
-      total_mount,
-      image,
-      name,
-      price,
     };
 
     handleUpdate(data);
@@ -53,7 +48,7 @@ export const ItemCarrito = ({
   return (
     <>
       <div className="w-full flex justify-between items-center transition-all">
-        <h1 className="text-lg truncate font-semibold">{name}</h1>
+        <h1 className="truncate font-semibold">{name}</h1>
         <Button
           onClick={() => handleTrash(userId, _id)}
           variant="ghost"
@@ -72,8 +67,13 @@ export const ItemCarrito = ({
             className="object-cover border  rounded-xl shadow-md"
           />
         </div>
-        <div className="col-span-2 space-y-3 my-auto">
-          <p className="font-semibold text-muted-foreground">Size: {size}</p>
+        <div className="col-span-2 space-y-1 ">
+          <p className="font-semibold text-muted-foreground text-sm">
+            Size: {size}
+          </p>
+          <p className="font-semibold text-muted-foreground text-sm">
+            SKU: {sku}
+          </p>
           <div className="grid grid-cols-2">
             <QuantitySelector
               onDecrement={decrement}

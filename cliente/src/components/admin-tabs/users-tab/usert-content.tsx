@@ -25,7 +25,6 @@ import Loading from "@/components/others/loading";
 export const UserContent = () => {
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getUsersApi = async () => {
@@ -34,8 +33,7 @@ export const UserContent = () => {
         const response = await getUsers();
         setUsers(response);
       } catch (error) {
-        setError("Error al cargar los usuarios");
-        console.log(error);
+        throw new Error((error as Error).message);
       } finally {
         setLoading(false);
       }
@@ -43,9 +41,14 @@ export const UserContent = () => {
     getUsersApi();
   }, []);
 
-  if (loading) return <Loading />;
-  if (error) return <p>{error}</p>;
-  if (!users) return <Loading />;
+  if (loading)
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <Loading />
+      </div>
+    );
+
+  if (!users) throw new Error("users not found");
 
   const handleDeleteUser = async (id: string) => {
     const resp: IUser = await deleteUser(id);

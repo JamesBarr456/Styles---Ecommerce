@@ -5,7 +5,7 @@ import React from "react";
 export default function NotFound() {
   return (
     <>
-      <main className="flex h-screen w-full flex-col items-center justify-center  bg-slate-100">
+      <main className="flex h-screen w-full flex-col items-center justify-center  bg-slate-100 font-poppins">
         <div className="relative ">
           <h1 className="text-9xl font-extrabold tracking-widest text-orange-300">
             404

@@ -14,21 +14,15 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const sortingOptions = [
-  { key: "price_ascending", label: "Precio: Menor a Mayor" },
   { key: "price_descending", label: "Precio: Mayor a Menor" },
+  { key: "price_ascending", label: "Precio: Menor a Mayor" },
   { key: "alpha_ascending", label: "A-Z" },
   { key: "alpha_descending", label: "Z-A" },
   { key: "created_descending", label: "Más Nuevo al más Viejo" },
   { key: "created_ascending", label: "Más Viejo al más Nuevo" },
 ];
 
-interface SortingSelectProps {
-  defaultValue?: string;
-}
-
-function SortingSelect({
-  defaultValue = sortingOptions[0].key,
-}: SortingSelectProps) {
+function SortingSelect() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -41,14 +35,14 @@ function SortingSelect({
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  const selectedSort = searchParams.get("sort_by") || defaultValue;
+  const selectedSort = searchParams.get("sort_by") || "";
 
   return (
     <Select onValueChange={handleValueChange} defaultValue={selectedSort}>
-      <SelectTrigger className="w-full rounded-xl border-none shadow-md">
-        <SelectValue placeholder="Seleccionar orden" />
+      <SelectTrigger className="w-full rounded-xl border-none shadow-md font-poppins">
+        <SelectValue placeholder="Ordenar por" />
       </SelectTrigger>
-      <SelectContent className="bg-white rounded-xl">
+      <SelectContent className="bg-white rounded-xl font-poppins">
         <SelectGroup>
           <SelectLabel>Opciones de ordenamiento</SelectLabel>
           {sortingOptions.map((option) => (

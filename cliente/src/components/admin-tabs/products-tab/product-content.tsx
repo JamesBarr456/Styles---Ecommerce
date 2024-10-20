@@ -3,6 +3,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -37,8 +38,6 @@ import Loading from "@/components/others/loading";
 import { Paginations } from "@/components/pagination/pagination";
 import { ProductForm } from "./product-form";
 
-// import { useRouter } from "next/navigation";
-
 interface Props {
   querys: {
     page?: string;
@@ -48,9 +47,6 @@ interface Props {
 export const ProductContent = ({ querys }: Props) => {
   const [products, setProducts] = useState<GetAllProductsResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // const router = useRouter()
 
   useEffect(() => {
     const getProductsApi = async () => {
@@ -59,8 +55,7 @@ export const ProductContent = ({ querys }: Props) => {
         const response = await getProducts(querys);
         setProducts(response);
       } catch (error) {
-        setError("Error al cargar los productos");
-        console.log(error);
+        throw new Error((error as Error).message);
       } finally {
         setLoading(false);
       }
@@ -68,9 +63,14 @@ export const ProductContent = ({ querys }: Props) => {
     getProductsApi();
   }, [querys]);
 
-  if (loading) return <Loading />;
-  if (error) return <p>{error}</p>;
-  if (!products) return <Loading />;
+  if (loading)
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <Loading />
+      </div>
+    );
+
+  if (!products) throw new Error("Products not found");
 
   const handleDeleteProduct = async (id: string) => {
     const resp: IProduct = await deleteProductById(id);
@@ -94,7 +94,7 @@ export const ProductContent = ({ querys }: Props) => {
 
   return (
     <>
-      <div className="mt-4 flex justify-end items-center">
+      <div className="mt-4 flex justify-end items-center font-poppins">
         <Dialog>
           <DialogTrigger asChild>
             <Button>
@@ -105,6 +105,7 @@ export const ProductContent = ({ querys }: Props) => {
           <DialogContent className="overflow-auto h-3/4">
             <DialogHeader>
               <DialogTitle>Add New Product</DialogTitle>
+              <DialogDescription />
             </DialogHeader>
             {/* Componente del formulario de product */}
             <ProductForm onCreate={handleCreateProduct} />
@@ -162,6 +163,7 @@ export const ProductContent = ({ querys }: Props) => {
                       <DialogContent className="overflow-auto h-3/4">
                         <DialogHeader>
                           <DialogTitle>Edit Product</DialogTitle>
+                          <DialogDescription />
                         </DialogHeader>
                         <ProductForm
                           onUpdate={handleUpdateProduct}

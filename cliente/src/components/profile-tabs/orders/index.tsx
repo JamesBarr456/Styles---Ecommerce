@@ -53,7 +53,7 @@ export const OrdersContent = () => {
 
     allOrdersUser();
   }, [user]);
-  console.log(orders);
+
   return (
     <Card>
       <CardHeader>
@@ -70,7 +70,7 @@ export const OrdersContent = () => {
               <TableHead>Date</TableHead>
               <TableHead>Total</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Items</TableHead>
+              <TableHead className="hidden lg:block">Items</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -86,8 +86,8 @@ export const OrdersContent = () => {
 
                 <TableCell>${order.total_amount.toFixed(2)}</TableCell>
                 <TableCell>{order.status}</TableCell>
-                <TableCell>
-                  <div className="flex space-x-2">
+                <TableCell className="hidden md:block w-40">
+                  <div className="md:grid md:grid-cols-3 lg:grid-cols-4 grid-1 ">
                     {order.items.map((item) => (
                       <Image
                         key={item._id}
@@ -135,9 +135,9 @@ export const OrdersContent = () => {
                             </Badge>
                           </div>
                           <div>
-                            <p className="text-sm font-medium">User ID</p>
+                            <p className="text-sm font-medium">User</p>
                             <p className="text-sm text-gray-500">
-                              {order.userId}
+                              {`${user?.first_name} ${user?.last_name} `}
                             </p>
                           </div>
                         </div>

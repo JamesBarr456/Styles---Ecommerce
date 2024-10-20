@@ -8,7 +8,7 @@ import { WishListContent } from "@/components/profile-tabs/wishlist";
 
 export default function UserProfile() {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 font-poppins">
       <Tabs defaultValue="profile">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="profile">

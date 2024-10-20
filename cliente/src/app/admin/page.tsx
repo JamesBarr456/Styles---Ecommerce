@@ -11,7 +11,7 @@ interface Props {
 }
 export default function Admin({ searchParams }: Props) {
   return (
-    <div className="container  mx-auto p-4 ">
+    <div className="container  mx-auto p-4 font-poppins">
       <Tabs defaultValue="products">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="products">
