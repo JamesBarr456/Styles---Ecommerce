@@ -2,6 +2,7 @@ interface Brand {
   name: string;
   image: string;
 }
+type Genre = "hombre" | "mujer" | "kids";
 
 export interface IProduct {
   _id: string;
@@ -13,7 +14,7 @@ export interface IProduct {
   stock: number;
   images: string[];
   discount: number;
-  genre: string;
+  genre: Genre;
   status: string;
   createdAt: string;
   updatedAt: string;
