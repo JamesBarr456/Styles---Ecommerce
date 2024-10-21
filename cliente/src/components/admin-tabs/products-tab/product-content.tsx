@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { GetAllProductsResponse, IProduct } from "@/interfaces/product";
 import { Pencil, Plus, Trash2 } from "lucide-react";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -107,93 +108,97 @@ export const ProductContent = ({ querys }: Props) => {
               <DialogTitle>Add New Product</DialogTitle>
               <DialogDescription />
             </DialogHeader>
-            {/* Componente del formulario de product */}
+
             <ProductForm onCreate={handleCreateProduct} />
           </DialogContent>
         </Dialog>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Image</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Stock</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Discount</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {products.products.map((product) => (
-            <TableRow key={product._id}>
-              <TableCell>
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  width={50}
-                  height={50}
-                  className="rounded-md"
-                />
-              </TableCell>
-              <TableCell>{product.name}</TableCell>
-              <TableCell>{product.genre}</TableCell>
-              <TableCell>{product.stock}</TableCell>
-              <TableCell>${product.price.toFixed(2)}</TableCell>
-              <TableCell>{product.discount}%</TableCell>
-              <TableCell>{product.status}</TableCell>
-              <TableCell>
-                <div className="flex space-x-2">
-                  <TooltipProvider>
-                    <Dialog>
+      <ScrollArea className="h-[400px] w-full rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Image</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Category</TableHead>
+              <TableHead>Stock</TableHead>
+              <TableHead>Price</TableHead>
+              <TableHead>Discount</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {products.products.map((product) => (
+              <TableRow key={product._id}>
+                <TableCell>
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    width={50}
+                    height={50}
+                    className="rounded-md"
+                  />
+                </TableCell>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>{product.genre}</TableCell>
+                <TableCell>{product.stock}</TableCell>
+                <TableCell>${product.price.toFixed(2)}</TableCell>
+                <TableCell>{product.discount}%</TableCell>
+                <TableCell>{product.status}</TableCell>
+                <TableCell>
+                  <div className="flex space-x-2">
+                    <TooltipProvider>
+                      <Dialog>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="icon">
+                                <Pencil className="h-4 w-4" />
+                              </Button>
+                            </DialogTrigger>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Edit Product</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <DialogContent className="overflow-auto h-3/4">
+                          <DialogHeader>
+                            <DialogTitle>Edit Product</DialogTitle>
+                            <DialogDescription />
+                          </DialogHeader>
+                          <ProductForm
+                            onUpdate={handleUpdateProduct}
+                            initData={product}
+                          />
+                        </DialogContent>
+                      </Dialog>
+                    </TooltipProvider>
+                    <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <DialogTrigger asChild>
-                            <Button variant="outline" size="icon">
-                              <Pencil className="h-4 w-4" />
-                            </Button>
-                          </DialogTrigger>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => handleDeleteProduct(product._id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Edit Product</p>
+                          <p>Delete Product</p>
                         </TooltipContent>
                       </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
 
-                      <DialogContent className="overflow-auto h-3/4">
-                        <DialogHeader>
-                          <DialogTitle>Edit Product</DialogTitle>
-                          <DialogDescription />
-                        </DialogHeader>
-                        <ProductForm
-                          onUpdate={handleUpdateProduct}
-                          initData={product}
-                        />
-                      </DialogContent>
-                    </Dialog>
-                  </TooltipProvider>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          onClick={() => handleDeleteProduct(product._id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Delete Product</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
       <Paginations totalPages={products.totalPages} />
     </>
   );

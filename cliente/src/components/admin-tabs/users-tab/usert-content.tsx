@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/interfaces/users";
 import Loading from "@/components/others/loading";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const UserContent = () => {
   const [users, setUsers] = useState<IUser[] | null>(null);
@@ -74,80 +75,82 @@ export const UserContent = () => {
   };
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>First Name</TableHead>
-          <TableHead>Last Name</TableHead>
-          <TableHead>DNI</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>Role</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {users.map((user) => (
-          <TableRow key={user._id}>
-            <TableCell>{user.first_name}</TableCell>
-            <TableCell>{user.last_name}</TableCell>
-            <TableCell>{user.dni}</TableCell>
-            <TableCell>{user.email}</TableCell>
-            <TableCell>{user.status}</TableCell>
-            <TableCell>active</TableCell>
-            <TableCell>
-              <div className="flex space-x-2">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        onClick={() => handleUserRole(user)}
-                        variant="outline"
-                        size="icon"
-                      >
-                        <UserCog className="h-4 w-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Update Role</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="outline" size="icon">
-                        <UserX className="h-4 w-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Bloquear User</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => handleDeleteUser(user._id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Delete User</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </div>
-            </TableCell>
+    <ScrollArea className="h-[400px] w-full rounded-md border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>First Name</TableHead>
+            <TableHead>Last Name</TableHead>
+            <TableHead>DNI</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {users.map((user) => (
+            <TableRow key={user._id}>
+              <TableCell>{user.first_name}</TableCell>
+              <TableCell>{user.last_name}</TableCell>
+              <TableCell>{user.dni}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.status}</TableCell>
+              <TableCell>active</TableCell>
+              <TableCell>
+                <div className="flex space-x-2">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          onClick={() => handleUserRole(user)}
+                          variant="outline"
+                          size="icon"
+                        >
+                          <UserCog className="h-4 w-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Update Role</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <UserX className="h-4 w-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Bloquear User</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => handleDeleteUser(user._id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Delete User</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </ScrollArea>
   );
 };

@@ -1,7 +1,15 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CreditCard, Truck, User } from "lucide-react";
+import { CheckCircle, CreditCard, Truck, User } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -22,9 +30,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { PaymentSkeleton } from "@/components/skeletons/payment-skeleton";
 import { useCart } from "@/context/CartContext";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
@@ -38,7 +46,7 @@ const formSchema = z.object({
     areaCode: z
       .string()
       .min(2, { message: "Code must be at least 2 digits" })
-      .max(5, { message: "Code can't exceed 4 digits" })
+      .max(4, { message: "Code can't exceed 4 digits" })
       .regex(numberRegex, "Code must contain only numbers"),
     number: z
       .string()
@@ -68,7 +76,9 @@ type FormData = z.infer<typeof formSchema>;
 
 export const PaymentFormSteps = () => {
   const [activeStep, setActiveStep] = useState("personal");
-  const { cartItems } = useCart();
+  const router = useRouter();
+  const { cartItems, updateStatusCart } = useCart();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<FormData>({
@@ -96,22 +106,9 @@ export const PaymentFormSteps = () => {
 
   const isFormValid = form.formState.isValid;
 
-  if (!cartItems) return <PaymentSkeleton />;
+  const empty = !cartItems || cartItems.items.length === 0;
 
-  const isCartEmpty = !cartItems || cartItems.items.length === 0;
-
-  const onSubmit = (data: FormData) => {
-    if (isCartEmpty || !isFormValid) {
-      toast({
-        title: isCartEmpty ? "Carrito vacío" : "Formulario incompleto",
-        description: isCartEmpty
-          ? "No puedes realizar un pago con el carrito vacío."
-          : "Por favor, completa todos los campos requeridos.",
-        variant: "destructive",
-      });
-      return;
-    }
-
+  const onSubmit = async (data: FormData) => {
     const paymentData = {
       amount: cartItems?.total_amount,
       currency: "ARS",
@@ -131,11 +128,19 @@ export const PaymentFormSteps = () => {
       orderId: cartItems?._id,
       customerEmail: data.email,
     };
-    console.log(paymentData);
-    toast({
-      title: "Pago procesado",
-      description: "Tu pago ha sido procesado exitosamente.",
-    });
+    try {
+      await updateStatusCart("completed");
+      console.log(paymentData);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast({
+        title: "Error en el pago",
+        description: `Ha ocurrido un error al procesar el pago. Por favor, inténtalo de nuevo. ${
+          (error as Error).message
+        }`,
+        variant: "destructive",
+      });
+    }
   };
 
   const handleTabChange = (value: string) => {
@@ -158,22 +163,19 @@ export const PaymentFormSteps = () => {
     }
   };
 
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+    router.push("/");
+  };
+
   return (
     <Card className="col-span-2">
       <CardHeader>
         <CardTitle>Proceso de Pago</CardTitle>
       </CardHeader>
       <CardContent>
-        {isCartEmpty ? (
-          <div className="text-center p-4">
-            <h2 className="text-xl font-semibold mb-2">Carrito Vacío</h2>
-            <p className="mb-4">
-              No puedes realizar un pago con el carrito vacío.
-            </p>
-            <Button asChild>
-              <Link href="/products">Volver a la Tienda</Link>
-            </Button>
-          </div>
+        {empty ? (
+          <EmptyForm />
         ) : (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -441,7 +443,36 @@ export const PaymentFormSteps = () => {
             </form>
           </Form>
         )}
+
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Compra Confirmada</DialogTitle>
+              <DialogDescription>
+                <div className="flex flex-col items-center justify-center space-y-4">
+                  <CheckCircle className="w-16 h-16 text-green-500" />
+                  <p>Su compra ha sido confirmada exitosamente.</p>
+                </div>
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button onClick={handleDialogClose}>Volver al Inicio</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </CardContent>
     </Card>
+  );
+};
+
+const EmptyForm = () => {
+  return (
+    <div className="text-center p-4">
+      <h2 className="text-xl font-semibold mb-2">Carrito Vacío</h2>
+      <p className="mb-4">No puedes realizar un pago con el carrito vacío.</p>
+      <Button asChild>
+        <Link href="/products">Volver a la Tienda</Link>
+      </Button>
+    </div>
   );
 };

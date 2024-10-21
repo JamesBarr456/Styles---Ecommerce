@@ -52,11 +52,13 @@ export const getCartItemsAPI = async (userId: string) => {
 
 export const updateCartItemAPI = async (
   cartId: string,
-  data: Partial<IItems>
+  data?: Partial<IItems>,
+  status?: "active" | "completed"
 ) => {
   try {
     const response = await axios.put(`${url}/carts/update/${cartId}`, {
       items: data,
+      status,
     });
 
     return response.data.data;

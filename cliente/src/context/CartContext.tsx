@@ -28,6 +28,7 @@ interface CartContextType {
   }) => Promise<void>;
   updateItemInCart: (data: Partial<IItems>) => Promise<void>;
   removeItemFromCart: (userId: string, itemId: string) => Promise<void>;
+  updateStatusCart: (status: "active" | "completed") => Promise<void>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -74,8 +75,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     try {
       if (cartItems) {
         const response = await updateCartItemAPI(cartItems._id, data);
-
         setCartItems(response);
+      }
+    } catch (error) {
+      console.error("Error updating item in cart:", error);
+    }
+  };
+  const updateStatusCart = async (status: "active" | "completed") => {
+    try {
+      if (cartItems) {
+        await updateCartItemAPI(cartItems._id, undefined, status);
+        setCartItems(null);
       }
     } catch (error) {
       console.error("Error updating item in cart:", error);
@@ -99,6 +109,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         addItemToCart,
         updateItemInCart,
         removeItemFromCart,
+        updateStatusCart,
       }}
     >
       {children}
