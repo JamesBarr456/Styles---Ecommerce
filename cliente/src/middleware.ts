@@ -2,6 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const protectedRoutes = ["/admin", "/profile"];
+const authRoutes = ["/auth/login", "/auth/register"];
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
@@ -11,7 +12,7 @@ export function middleware(request: NextRequest) {
     protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
   ) {
     if (!token) {
-      return NextResponse.redirect(new URL("/auth/login", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
 
     if (storedUser) {
@@ -19,11 +20,17 @@ export function middleware(request: NextRequest) {
 
       if (request.nextUrl.pathname.startsWith("/admin")) {
         if (user.status !== "admin") {
-          return NextResponse.redirect(new URL("/auth/login", request.url));
+          return NextResponse.redirect(new URL("/", request.url));
         }
       }
     } else {
-      return NextResponse.redirect(new URL("/auth/login", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
+  if (authRoutes.some((route) => request.nextUrl.pathname.startsWith(route))) {
+    if (token) {
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 
@@ -31,5 +38,10 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/profile/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/profile/:path*",
+    "/auth/login",
+    "/auth/register",
+  ],
 };

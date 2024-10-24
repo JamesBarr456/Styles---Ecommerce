@@ -17,58 +17,20 @@ import { Button } from "@/components/ui/button";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { registerSchema } from "@/schemas";
 import { registerUser } from "@/services/users";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const numberRegex = /^\d+$/;
-
-const formSchema = z
-  .object({
-    first_name: z.string({ message: "Is required" }),
-    last_name: z.string({ message: "Is required" }),
-    dni: z
-      .string({ message: "DNI is required" })
-      .min(7, { message: "DNI must be at least 7 characters" })
-      .max(8, { message: "DNI must be at most 8 characters" })
-      .regex(numberRegex, { message: "DNI must contain only numbers" }),
-    number_phone: z.object({
-      areaCode: z
-        .string()
-        .min(2, { message: "Code must be at least 2 digits" })
-        .max(4, { message: "Code can't exceed 4 digits" })
-        .regex(numberRegex, "Code must contain only numbers"),
-      number: z
-        .string()
-        .min(6, { message: "Number must be at least 6 digits" })
-        .max(10, { message: "Number can't exceed 10 digits" })
-        .regex(numberRegex, "Phone number must contain only numbers"),
-    }),
-    email: z.string().email({ message: "Email is invalid" }),
-    confirmEmail: z.string(),
-    password: z
-      .string({ required_error: "Password is required" })
-      .min(6, { message: "Password must be at least 6 characters" }),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "passwords do not match",
-    path: ["confirmPassword"],
-  })
-  .refine((data) => data.email === data.confirmEmail, {
-    message: "Emails do not match",
-    path: ["confirmEmail"],
-  });
-
-type FormData = z.infer<typeof formSchema>;
+type registerData = z.infer<typeof registerSchema>;
 
 export default function RegistrationForm() {
   const [backendError, setBackendError] = useState<string | null>(null);
   const router = useRouter();
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<registerData>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       first_name: "",
       last_name: "",
@@ -80,7 +42,7 @@ export default function RegistrationForm() {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: registerData) => {
     const newUserForm = {
       first_name: data.first_name,
       last_name: data.last_name,
@@ -172,7 +134,7 @@ export default function RegistrationForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-1">
-                  Código de área
+                  Cod. de área
                   <Asterisk size={16} className="text-red-500" />
                 </FormLabel>
                 <FormControl>

@@ -1,5 +1,5 @@
 import { Product } from "../models/product.model";
-import connectDB from "../../db/dbConnect";
+import connectDB from "../db/dbConnect";
 import mongoose from "mongoose";
 import products from "./products.json";
 

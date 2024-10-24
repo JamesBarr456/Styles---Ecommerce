@@ -17,30 +17,22 @@ import { Button } from "@/components/ui/button";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { loginSchema } from "@/schemas";
 import { loginUser } from "@/services/users";
 import { useAuth } from "@/context/AuthContext";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const formSchema = z.object({
-  email: z
-    .string({ message: "Email is required" })
-    .email({ message: "Email is invalid" }),
-  password: z
-    .string({ message: "Password is required" })
-    .min(6, { message: "Password must be at least 6 characters" }),
-});
-
-type FormData = z.infer<typeof formSchema>;
+type loginData = z.infer<typeof loginSchema>;
 
 export default function RegistrationForm() {
   const [backendError, setBackendError] = useState<string | null>(null);
 
   const { login } = useAuth();
 
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<loginData>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -48,7 +40,7 @@ export default function RegistrationForm() {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: loginData) => {
     try {
       const res = await loginUser(data);
       login(res.token, res.data);

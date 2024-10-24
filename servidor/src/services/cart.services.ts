@@ -114,33 +114,50 @@ class CartServices {
       throw Error((error as Error).message);
     }
   }
-  async updateCart(id: string, data: IItems) {
+  async updateCart(
+    id: string,
+    data: { items?: IItems; status?: "active" | "completed" }
+  ) {
     try {
-      const [cart, product] = await Promise.all([
-        getCartById(id),
-        Product.findById(data.productId),
-      ]);
+      const cart = await getCartById(id);
 
       if (!cart) {
         throw new Error("Cart not found");
       }
 
-      if (!product) {
-        throw new Error("El producto no existe en la base de datos");
+      if (data.status) {
+        cart.status = data.status;
+        await cart.save();
+        return cart;
       }
 
-      const item = cart.items.find((i) => i._id?.toString() === data._id);
+      if (data.items) {
+        const product = await Product.findById(data.items.productId);
 
-      if (!item) {
-        throw new Error("Item not found in cart");
+        if (!product) {
+          throw new Error(
+            `El producto con ID ${data.items.productId} no existe en la base de datos`
+          );
+        }
+
+        const item = cart.items.find(
+          (i) => i._id?.toString() === data.items?._id
+        );
+
+        if (!item) {
+          throw new Error(
+            `Item con ID ${data.items._id} no encontrado en el carrito`
+          );
+        }
+
+        const previousTotal = item.total_mount;
+        const discount = product.discount > 0 ? 1 - product.discount / 100 : 1;
+        item.quantity = data.items.quantity;
+        item.total_mount = item.quantity * item.price * discount;
+
+        cart.total_amount =
+          cart.total_amount - previousTotal + item.total_mount;
       }
-
-      const previousTotal = item.total_mount;
-      const discount = product.discount > 0 ? 1 - product.discount / 100 : 1;
-      item.quantity = data.quantity;
-      item.total_mount = item.quantity * item.price * discount;
-
-      cart.total_amount = cart.total_amount - previousTotal + item.total_mount;
 
       const updatedCart = await updateCart(id, cart);
 
@@ -190,7 +207,7 @@ class CartServices {
         0
       );
 
-      cart.total_amount = totalWithoutDiscount - discount;
+      cart.total_amount = totalWithoutDiscount * (1 - discount / 100);
       const updatedCart = await cart.save();
       return updatedCart;
     } catch (error) {

@@ -23,31 +23,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/interfaces/users";
 import { Input } from "@/components/ui/input";
+import Loading from "@/components/others/loading";
 import { ProfileSkeleton } from "@/components/skeletons/profile-skeleton";
+import { profileSchema } from "@/schemas";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/context/AuthContext";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const numberRegex = /^\d+$/;
-const formSchema = z.object({
-  first_name: z.string({ message: "Is required" }),
-  last_name: z.string({ message: "Is required" }),
-  dni: z
-    .string({ message: "DNI is required" })
-    .min(7, { message: "DNI must be at least 7 characters" })
-    .max(8, { message: "DNI must be at most 8 characters" })
-    .regex(numberRegex, { message: "DNI must contain only numbers" }),
-  number_phone: z
-    .string()
-    .min(8, { message: "Code must be at least 8 digits" })
-    .max(14, { message: "Code can't exceed 14 digits" })
-    .regex(numberRegex, "Code must contain only numbers"),
-  email: z.string().email({ message: "Email is invalid" }),
-  avatar: z.string().url({
-    message: "Please enter a valid URL for the avatar.",
-  }),
-});
 
 export const ProfileContent = () => {
   const { user, update } = useAuth();
@@ -65,8 +48,9 @@ interface Props {
 }
 
 const ProfileForm = ({ dataUser, update }: Props) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [loadingChange, setLoadingChange] = useState(false);
+  const form = useForm<z.infer<typeof profileSchema>>({
+    resolver: zodResolver(profileSchema),
     defaultValues: {
       first_name: dataUser.first_name || "",
       last_name: dataUser.last_name || "",
@@ -77,16 +61,21 @@ const ProfileForm = ({ dataUser, update }: Props) => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof profileSchema>) => {
     try {
-      update(dataUser._id, values);
+      setLoadingChange(true);
 
-      toast({
-        title: "Profile updated",
-        description: "Your profile has been successfully updated.",
-      });
+      setTimeout(async () => {
+        await update(dataUser._id, values);
+        setLoadingChange(false);
+        toast({
+          title: "Profile updated",
+          description: "Your profile has been successfully updated.",
+        });
+      }, 2000);
     } catch (error) {
       if (error instanceof Error) {
+        setLoadingChange(false);
         toast({
           title: "Error",
           description: `There was an error updating your profile. message: ${error.message}`,
@@ -197,7 +186,13 @@ const ProfileForm = ({ dataUser, update }: Props) => {
             />
           </CardContent>
           <CardFooter>
-            <Button type="submit">Save Changes</Button>
+            <Button
+              variant={"outline"}
+              disabled={loadingChange || !form.formState.isDirty}
+              type="submit"
+            >
+              {loadingChange ? <Loading /> : "Save Changes"}
+            </Button>
           </CardFooter>
         </form>
       </Form>

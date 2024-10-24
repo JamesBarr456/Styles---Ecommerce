@@ -22,34 +22,22 @@ import {
 import { Button } from "@/components/ui/button";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
+import Loading from "@/components/others/loading";
 import { putPasswordUser } from "@/services/users";
+import { seguritySchema } from "@/schemas";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/context/AuthContext";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const formSchema = z
-  .object({
-    currentPassword: z.string().min(1, "Current password is required"),
-
-    newPassword: z
-      .string({ required_error: "Password is required" })
-      .min(6, { message: "Password must be at least 6 characters" }),
-    confirmPassword: z.string().min(1, "Please confirm your new password"),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
-
 export const SecurityContent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [backendError, setBackendError] = useState<string | null>(null);
   const { updatePassword, user } = useAuth();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof seguritySchema>>({
+    resolver: zodResolver(seguritySchema),
     defaultValues: {
       currentPassword: "",
       newPassword: "",
@@ -57,7 +45,7 @@ export const SecurityContent = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof seguritySchema>) {
     setIsLoading(true);
     try {
       if (user) {
@@ -143,8 +131,8 @@ export const SecurityContent = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Changing Password..." : "Change Password"}
+            <Button type="submit" variant={"outline"} disabled={isLoading}>
+              {isLoading ? <Loading /> : "Change Password"}
             </Button>
           </form>
         </Form>
