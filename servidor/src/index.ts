@@ -4,6 +4,6 @@ import connectDB from "./db/dbConnect";
 
 connectDB();
 
-app.listen(+PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listen in port ${PORT}`);
 });

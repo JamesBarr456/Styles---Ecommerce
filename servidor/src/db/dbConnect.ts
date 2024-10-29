@@ -22,5 +22,4 @@ const connectDB = async () => {
   }
 };
 
-console.log("yo muestro la vairable de entorno", MONGO_URL);
 export default connectDB;

@@ -15,6 +15,7 @@ const {
 class UserController {
   async registerUser(req: Request, res: Response) {
     const data = req.body;
+
     try {
       await registerUser(data);
       res.status(200).json({ message: "Register successfully" });
