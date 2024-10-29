@@ -63,7 +63,7 @@ export const deleteProductById = async (id: string) => {
   }
 };
 
-export const addProductToApi = async (data: Partial<IProduct>) => {
+export const addProductToApi = async (data: any) => {
   try {
     const res = await axios.post(`${url}/products/add`, data);
     return res.data.data;
@@ -75,7 +75,7 @@ export const addProductToApi = async (data: Partial<IProduct>) => {
   }
 };
 
-export const putProductToApi = async (id: string, data: Partial<IProduct>) => {
+export const putProductToApi = async (id: string, data: any) => {
   try {
     const res = await axios.put(`${url}/products/update/${id}`, data);
     return res.data.data;

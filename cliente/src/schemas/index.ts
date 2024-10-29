@@ -3,6 +3,7 @@ import { z } from "zod";
 // Regex
 const numberRegex = /^\d+$/;
 
+//Schemas de Forms
 export const loginSchema = z.object({
   email: z
     .string({ message: "Email is required" })

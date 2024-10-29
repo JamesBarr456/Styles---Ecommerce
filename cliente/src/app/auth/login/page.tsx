@@ -1,7 +1,5 @@
 "use client";
 
-import * as z from "zod";
-
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Form,
@@ -11,57 +9,52 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useFormState, useFormStatus } from "react-dom";
 
 import { Asterisk } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ButtonSubmit } from "@/components/others/buttons/button-submit";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { loginAction } from "@/actions";
 import { loginSchema } from "@/schemas";
-import { loginUser } from "@/services/users";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type loginData = z.infer<typeof loginSchema>;
+type LoginData = z.infer<typeof loginSchema>;
 
 export default function RegistrationForm() {
-  const [backendError, setBackendError] = useState<string | null>(null);
-
   const { login } = useAuth();
+  const [state, formAction] = useFormState(loginAction, null);
 
-  const form = useForm<loginData>({
+  const form = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
-    mode: "onChange",
   });
 
-  const onSubmit = async (data: loginData) => {
-    try {
-      const res = await loginUser(data);
-      login(res.token, res.data);
-    } catch (error) {
-      if (error instanceof Error) {
-        setBackendError(error.message);
-      }
+  useEffect(() => {
+    if (state?.success) {
+      login(state.token, state.userData);
     }
-  };
+  }, [state, login]);
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        action={formAction}
         className="space-y-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md my-12"
       >
-        {backendError && (
+        {state?.error && (
           <Alert variant="destructive">
             <ExclamationTriangleIcon className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{backendError}</AlertDescription>
+            <AlertDescription>{state.error}</AlertDescription>
           </Alert>
         )}
 
@@ -70,7 +63,6 @@ export default function RegistrationForm() {
         </h2>
 
         <FormField
-          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -87,7 +79,6 @@ export default function RegistrationForm() {
         />
 
         <FormField
-          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -101,15 +92,9 @@ export default function RegistrationForm() {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={!form.formState.isValid}
-        >
-          Log in
-        </Button>
+        <ButtonSubmit text="Iniciar Sesión" />
         <p className="text-center text-sm text-muted-foreground">
-          Don&apos; have an account?
+          Don&apos;t have an account?
           <Link
             href="register"
             className="mx-4 font-medium text-primary hover:underline"

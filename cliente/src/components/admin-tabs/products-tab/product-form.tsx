@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { IProduct } from "@/interfaces/product";
@@ -23,9 +24,10 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
+import { addProductAction } from "@/actions";
 import { productSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useFormState } from "react-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -37,6 +39,7 @@ interface Props {
 export const ProductForm = ({ initData, onUpdate, onCreate }: Props) => {
   const [images, setImages] = useState<string[]>(initData?.images || []);
   const [sizes, setSizes] = useState<number[]>(initData?.size || []);
+  const [state, formAction] = useFormState(addProductAction, null);
 
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
@@ -55,48 +58,15 @@ export const ProductForm = ({ initData, onUpdate, onCreate }: Props) => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: z.infer<typeof productSchema>) => {
-    if (images.length === 0) {
-      form.setError("imageUrl", {
-        type: "manual",
-        message: "You must add at least one image URL",
-      });
-      return;
-    }
-
-    if (sizes.length === 0) {
-      form.setError("size", {
-        type: "manual",
-        message: "You must add at least one size",
-      });
-      return;
-    }
-
-    const newProductForm = {
-      name: data.name,
-      genre: data.genre,
-      discount: +data.discount,
-      images: images,
-      price: +data.price,
-      brand: data.brand,
-      description: data.description,
-      sku: data.sku,
-      size: sizes.sort().map(Number),
-      stock: +data.stock,
-    };
-
-    try {
-      if (!initData && onCreate) {
-        onCreate(newProductForm);
-      } else if (initData && onUpdate) {
-        onUpdate(initData._id, newProductForm);
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
+  useEffect(() => {
+    if (state?.success) {
+      if (!initData) {
+        form.reset();
+        setImages([]);
+        setSizes([]);
       }
     }
-  };
+  }, [state, form, initData]);
 
   const handleAddImage = () => {
     const imageUrl = form.getValues("imageUrl");
@@ -124,10 +94,7 @@ export const ProductForm = ({ initData, onUpdate, onCreate }: Props) => {
   return (
     <ScrollArea>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 font-poppins p-5"
-        >
+        <form action={formAction} className="space-y-4 font-poppins p-5">
           <FormField
             control={form.control}
             name="name"

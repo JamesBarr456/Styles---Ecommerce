@@ -20,16 +20,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { Button } from "@/components/ui/button";
+import { ButtonSubmit } from "@/components/others/buttons/button-submit";
 import { IUser } from "@/interfaces/users";
 import { Input } from "@/components/ui/input";
-import Loading from "@/components/others/loading";
 import { ProfileSkeleton } from "@/components/skeletons/profile-skeleton";
+import { profileAction } from "@/actions";
 import { profileSchema } from "@/schemas";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useFormState } from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export const ProfileContent = () => {
@@ -44,11 +45,11 @@ export const ProfileContent = () => {
 };
 interface Props {
   dataUser: IUser;
-  update: (userId: string, dataUser: Partial<IUser>) => void;
+  update: (dataUser: IUser) => void;
 }
 
 const ProfileForm = ({ dataUser, update }: Props) => {
-  const [loadingChange, setLoadingChange] = useState(false);
+  const [state, formAction] = useFormState(profileAction, null);
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
@@ -61,29 +62,23 @@ const ProfileForm = ({ dataUser, update }: Props) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof profileSchema>) => {
-    try {
-      setLoadingChange(true);
+  useEffect(() => {
+    if (state?.success) {
+      update(state.userData);
 
-      setTimeout(async () => {
-        await update(dataUser._id, values);
-        setLoadingChange(false);
-        toast({
-          title: "Profile updated",
-          description: "Your profile has been successfully updated.",
-        });
-      }, 2000);
-    } catch (error) {
-      if (error instanceof Error) {
-        setLoadingChange(false);
-        toast({
-          title: "Error",
-          description: `There was an error updating your profile. message: ${error.message}`,
-          variant: "destructive",
-        });
-      }
+      toast({
+        title: "Profile updated",
+        description: "Your profile has been successfully updated.",
+      });
+    } else if (state?.error) {
+      toast({
+        title: "Error",
+        description: `There was an error updating your profile. Message: ${state?.error}`,
+        variant: "destructive",
+      });
     }
-  };
+  }, [state, update]);
+
   return (
     <Card>
       <CardHeader>
@@ -91,11 +86,8 @@ const ProfileForm = ({ dataUser, update }: Props) => {
         <CardDescription>Manage your profile details here.</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form
-          onSubmit={(e) => {
-            form.handleSubmit(onSubmit)(e);
-          }}
-        >
+        <form action={formAction}>
+          <input type="hidden" name="userId" value={dataUser._id} />
           <CardContent className="space-y-4">
             <div className="flex items-center space-x-4">
               <Avatar className="h-20 w-20">
@@ -186,13 +178,7 @@ const ProfileForm = ({ dataUser, update }: Props) => {
             />
           </CardContent>
           <CardFooter>
-            <Button
-              variant={"outline"}
-              disabled={loadingChange || !form.formState.isDirty}
-              type="submit"
-            >
-              {loadingChange ? <Loading /> : "Save Changes"}
-            </Button>
+            <ButtonSubmit text="Save Change" />
           </CardFooter>
         </form>
       </Form>

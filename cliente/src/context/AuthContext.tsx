@@ -4,7 +4,6 @@ import React, { ReactNode, createContext, useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
 import { IUser } from "@/interfaces/users";
-import { putUser } from "@/services/users";
 import { useRouter } from "next/navigation";
 
 interface AuthContextProps {
@@ -13,7 +12,7 @@ interface AuthContextProps {
   loading: boolean;
   login: (newToken: string, userData: IUser) => void;
   logout: () => void;
-  update: (id: string, data: Partial<IUser>) => void;
+  update: (data: IUser) => void;
   updatePassword: (data: IUser) => void;
 }
 
@@ -57,14 +56,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     router.push("/auth/login");
   };
 
-  const update = async (id: string, data: Partial<IUser>) => {
-    try {
-      const updatedUser = await putUser(id, data);
-      setUser(updatedUser);
-      Cookies.set("user", JSON.stringify(updatedUser), { expires: 1 });
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+  const update = (data: IUser) => {
+    setUser(data);
+    Cookies.set("user", JSON.stringify(data), { expires: 1 });
   };
   const updatePassword = (data: IUser) => {
     setUser(data);

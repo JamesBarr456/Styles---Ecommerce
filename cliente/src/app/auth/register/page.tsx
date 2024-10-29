@@ -13,21 +13,21 @@ import {
 } from "@/components/ui/form";
 
 import { Asterisk } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ButtonSubmit } from "@/components/others/buttons/button-submit";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { registerAction } from "@/actions";
 import { registerSchema } from "@/schemas";
-import { registerUser } from "@/services/users";
 import { useForm } from "react-hook-form";
+import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type registerData = z.infer<typeof registerSchema>;
 
 export default function RegistrationForm() {
-  const [backendError, setBackendError] = useState<string | null>(null);
+  const [state, formAction] = useFormState(registerAction, null);
   const router = useRouter();
   const form = useForm<registerData>({
     resolver: zodResolver(registerSchema),
@@ -42,38 +42,24 @@ export default function RegistrationForm() {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: registerData) => {
-    const newUserForm = {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      dni: data.dni,
-      number_phone: data.number_phone.areaCode + data.number_phone.number,
-      email: data.email,
-      password: data.password,
-    };
-    try {
-      await registerUser(newUserForm);
-      router.push("login");
-    } catch (error) {
-      if (error instanceof Error) {
-        setBackendError(error.message);
-      }
-    }
-  };
+  if (state?.success) {
+    router.push("login");
+  }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        action={formAction}
         className="space-y-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md my-12"
       >
-        {backendError && (
+        {state?.error && (
           <Alert variant="destructive">
             <ExclamationTriangleIcon className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{backendError}</AlertDescription>
+            <AlertDescription>{state.error}</AlertDescription>
           </Alert>
         )}
+
         <h2 className="text-2xl font-bold mb-6 text-center">
           Registro de Usuario
         </h2>
@@ -229,13 +215,8 @@ export default function RegistrationForm() {
           )}
         />
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={!form.formState.isValid}
-        >
-          Registrarse
-        </Button>
+        <ButtonSubmit text="Registrarse" />
+
         <p className="text-center text-sm text-muted-foreground">
           Do you already have an account?
           <Link
