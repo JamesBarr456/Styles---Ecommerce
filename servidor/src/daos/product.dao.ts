@@ -1,5 +1,6 @@
 import { IProduct } from "../types/IProduct";
 import { Product } from "../models/product.model";
+import mongoose from "mongoose";
 
 class ProductDao {
   async createProduct(data: IProduct) {
@@ -35,7 +36,9 @@ class ProductDao {
 
   async getProductById(productId: string) {
     try {
-      const product = await Product.findById(productId);
+      const product = await Product.findById(
+        new mongoose.Types.ObjectId(productId)
+      );
       return product;
     } catch (error) {
       throw Error((error as Error).message);
@@ -52,7 +55,7 @@ class ProductDao {
   }
 
   async getAllProducts(
-    category: string | undefined,
+    genre: string | undefined,
     brand: string | undefined,
     page: number | string | undefined,
     sort: Record<string, 1 | -1> | undefined,
@@ -64,19 +67,29 @@ class ProductDao {
   ) {
     try {
       const skip = (Number(page) - 1) * Number(limit);
-      const products = await Product.find({
+      const filters = {
         ...(status ? { status } : {}),
         ...(brand ? { brand } : {}),
-        ...(category ? { category } : {}),
+        ...(genre ? { genre } : {}),
         ...(size ? { size } : {}),
-        ...(priceMin && priceMax
+        ...(priceMin !== undefined && priceMax !== undefined
           ? { price: { $gte: priceMin, $lte: priceMax } }
           : {}),
-      })
+      };
+
+      const totalProducts = await Product.countDocuments(filters);
+
+      const products = await Product.find(filters)
         .sort(sort)
         .limit(limit + skip)
         .skip(skip);
-      return products;
+
+      const totalPages = Math.ceil(totalProducts / limit);
+      return {
+        products,
+        totalPages,
+        totalProducts,
+      };
     } catch (error) {
       throw Error((error as Error).message);
     }

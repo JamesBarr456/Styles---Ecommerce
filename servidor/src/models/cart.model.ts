@@ -1,6 +1,8 @@
 import { Schema, model } from "mongoose";
 
-const cartSchema = new Schema(
+import { ICart } from "../types/ICart";
+
+const cartSchema = new Schema<ICart>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -14,21 +16,50 @@ const cartSchema = new Schema(
           ref: "Product",
           required: true,
         },
+        sku: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        image: {
+          type: String,
+          required: true,
+        },
         quantity: {
+          type: Number,
+          required: true,
+        },
+        size: {
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+        total_mount: {
           type: Number,
           required: true,
         },
       },
     ],
-    total_mount: {
+    total_amount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    promoCodeDiscount: {
       type: Number,
       default: 0,
-    }, // Total del carrito
+    },
     status: {
       type: String,
       enum: ["active", "completed"],
       default: "active",
-    }, // Estado del carrito
+    },
   },
   { timestamps: true }
 );

@@ -1,16 +1,24 @@
 import mongoose from "mongoose";
 
-type CardStatus = "active" | "completed";
+type CartStatus = "active" | "completed";
+
+export interface IItems {
+  _id?: string;
+  productId: mongoose.Types.ObjectId | string;
+  name: string;
+  image: string;
+  quantity: number;
+  size: number;
+  price: number;
+  total_mount: number;
+  sku: string;
+}
 
 export interface ICart {
   _id: string;
   userId: mongoose.Types.ObjectId | string;
-  items: [
-    {
-      productId: mongoose.Types.ObjectId | string;
-      quantity: number;
-    }
-  ];
-  total_mount: number;
-  status: CardStatus;
+  items: IItems[];
+  total_amount: number;
+  promoCodeDiscount?: number;
+  status: CartStatus;
 }

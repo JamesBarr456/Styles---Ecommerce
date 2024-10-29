@@ -33,18 +33,18 @@ class CartDao {
     }
   }
 
-  async deleteCart(cardId: string) {
+  async getCartByIdAndStatus(userId: string) {
     try {
-      const card = await Cart.findByIdAndDelete(cardId);
-      return card;
+      const cart = await Cart.findOne({ userId: userId, status: "active" });
+      return cart;
     } catch (error) {
       throw Error((error as Error).message);
     }
   }
 
-  async getCartByIdAndStatus(userId: string) {
+  async getAllCartUser(userId: string) {
     try {
-      const cart = await Cart.findOne({ userId: userId, status: "active" });
+      const cart = await Cart.find({ userId });
       return cart;
     } catch (error) {
       throw Error((error as Error).message);

@@ -1,6 +1,6 @@
 import { PORT } from "./config";
 import app from "./app";
-import connectDB from "../db/dbConnect";
+import connectDB from "./db/dbConnect";
 
 connectDB();
 

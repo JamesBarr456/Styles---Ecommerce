@@ -1,101 +1,57 @@
 import Image from "next/image";
+import { ProductCategoryGrid } from "@/components/product/product-category-grid";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className="flex flex-col gap-7 items-center container mx-auto space-y-5 font-poppins">
+      <Image
+        width={0}
+        height={0}
+        sizes="100vw"
+        className="object-cover h-auto w-full "
+        alt="banner"
+        src="https://www.dropbox.com/scl/fi/15vgne07d7pi5x7osudg8/banner-1.jpeg?rlkey=nbqvdu2kiu5zce8iwu164q16y&st=206cqz6i&raw=1"
+        priority
+      />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      <ProductCategoryGrid
+        title="lo mas nuevo"
+        query={{ sort_by: "created_descending" }}
+      />
+      <h2 className="text-3xl  uppercase font-semibold text-orange-400">
+        las marcas con que trabajamos
+      </h2>
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:flex lg:justify-evenly justify-items-center px-5 gap-3">
+        {marcas.map((marca, i) => (
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            key={i}
+            width={100}
+            height={100}
+            className="object-contain"
+            alt="banner"
+            src={marca}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        ))}
+      </div>
+
+      <Image
+        width={0}
+        height={0}
+        sizes="100vw"
+        className="object-cover h-auto w-full "
+        alt="banner"
+        src="https://www.dropbox.com/scl/fi/tl71rg23ql6sd2h3xhly6/banner-2.jpeg?rlkey=7j7ixkd51ysd8mdckj1xqtx5h&st=kjovdihq&raw=1"
+        priority
+      />
+    </main>
   );
 }
+
+const marcas = [
+  "https://www.dropbox.com/scl/fi/kuut97qlikgbv2hiny4zz/adidass-150x150.png?rlkey=znic8u9t39niw82qv4vep2ql3&st=sqxofmea&raw=1",
+  "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=clcm5nt0&raw=1",
+  "https://www.dropbox.com/scl/fi/7zjl8srrlhcgj8w37q5fv/vans-150x150.png?rlkey=3g50dn3vixv7s5l2vfuz0w4j3&st=678d5de8&raw=1",
+  "https://www.dropbox.com/scl/fi/9j7dnn3tnd49oo1jtczkk/6-150x150.png?rlkey=lgzzfdjgp41ew5euxnr97aff3&st=0231uh6l&raw=1",
+  "https://www.dropbox.com/scl/fi/3bl52tai95anym2erhufb/converse2-150x150.png?rlkey=h58lswc4rvlzaux60xzh9bvgg&st=ul04r6zx&raw=1",
+  "https://www.dropbox.com/scl/fi/o67vffv91p14zn3zlttu8/LACOSTE-150x150.png?rlkey=jimcpl6uckh985429n27qm13b&st=r4wjwbxt&raw=1",
+];

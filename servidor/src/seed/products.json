@@ -12,7 +12,7 @@
         "sku": "AD-NEO10K-BLK",
         "price": "120000",
         "size": [ "38", "39", "40", "41", "42", "43" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/hlanq8ohduixxecz85f14/ADIDAS-NEO-10K-BLACK-1.png?rlkey=lo566dcmmpuj9uj4juw6vhvqz&st=o832xy4n&raw=1",
@@ -33,7 +33,7 @@
         "sku": "AD-NEO10K-PNK",
         "price": "120000",
         "size": [ "38", "39", "40", "41", "42", "43" ],
-        "category": "mujer",
+        "genre": "mujer",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/6gtkdrksbkxatxygg9a9x/ADIDAS-NEO-10K-PINK-1.png?rlkey=t5nn89zd7fpuz4zdhlh13ja98&st=kdy955a0&raw=1",
@@ -54,7 +54,7 @@
         "sku": "NK-AIRF1-WTE",
         "price": "300000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/7dokpk19c420gzwwrfc0s/NIKE-AIR-FORCE-01-VN-WHITE-1.png?rlkey=cd2oyx3qiehia0n3kw3winbip&st=1et6s7ty&raw=1",
@@ -74,7 +74,7 @@
         "sku": "NK-AIRF1-WYB",
         "price": "300000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/wv41gvjtne126gxthu891/NIKE-AIR-FORCE-01-VN-WyB-1.png?rlkey=94il7840flnitu33ky4b13wio&st=g36b0ede&raw=1",
@@ -94,7 +94,7 @@
         "sku": "NK-AIRFLV-RED",
         "price": "200000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "mujer",
+        "genre": "mujer",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/mp1hfrtmblhkt0g0stvio/NIKE-AIR-FORCE-LV-RED-1.png?rlkey=xqj5yi2evdw5n0pl55yeb6pkq&st=pfrapmf2&raw=1",
@@ -114,13 +114,143 @@
         "sku": "NK-AIRFLV-WYB",
         "price": "200000",
         "size": [ "38", "39", "40", "41", "42", "43", "44" ],
-        "category": "hombre",
+        "genre": "hombre",
         "stock": 100,
         "images": [
           "https://www.dropbox.com/scl/fi/0y6yj5i9umvs8dxemvhsu/NIKE-AIR-FORCE-LV-WyB-1.png?rlkey=w9cnzb1u3cvk8llx4jz8br030&st=ppyx7xsp&raw=1",
           "https://www.dropbox.com/scl/fi/5i3ogb749uzbjofohrmfy/NIKE-AIR-FORCE-LV-WyB-2.png?rlkey=vi63s5h967atnywipvc0o1s03&st=ys9523jk&raw=1",
           "https://www.dropbox.com/scl/fi/d91s0k3ce1q3dnlpg0ple/NIKE-AIR-FORCE-LV-WyB-3.png?rlkey=neh4qfkpv947b3pf39zkjguaf&st=km59gdql&raw=1"
         ]
+      },
+      {
+        "name": "NIKE JORDAN 4 RETRO - CREMA",
+        "brand":  {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "Las Jordan 4 Retro son una de las zapatillas más icónicas en la historia del calzado deportivo. Lanzadas originalmente en 1989, estas zapatillas combinan estilo y rendimiento, destacándose por su diseño único y su durabilidad. Con su estructura de cuero premium, paneles de malla y la característica unidad de aire visible en la suela, ofrecen una mezcla perfecta de comodidad y soporte. Las Jordan 4 Retro siguen siendo un símbolo de la cultura sneaker y un básico tanto para coleccionistas como para amantes del baloncesto.",
+        "sku": "NK-JOR4R-CRE",
+        "price": "200000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "genre": "mujer",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/wvk62wdhwiaw6fp32gb2e/NIKE-JORDAN-4-RETRO-CREMA-1.png?rlkey=enwo0onl5mz93wh5jx9tbbgwr&st=c87idnid&raw=1",
+          "https://www.dropbox.com/scl/fi/ck8sk0d2kqrixlr6pgt7j/NIKE-JORDAN-4-RETRO-CREMA-2.png?rlkey=jwvsca2gw2qx6e99t6ak6eu7e&st=14ijuz4o&raw=1",
+          "https://www.dropbox.com/scl/fi/4cilvu4ku9pvsc8l8w0u6/NIKE-JORDAN-4-RETRO-CREMA-3.png?rlkey=f4m5usf2l2e3807rq0uokgbv2&st=br2r45n1&raw=1"
+        ],
+        "discount": 20
+      },
+      {
+        "name": "NIKE JORDAN 4 RETRO - CELESTE",
+        "brand": {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "Las Jordan 4 Retro son una de las zapatillas más icónicas en la historia del calzado deportivo. Lanzadas originalmente en 1989, estas zapatillas combinan estilo y rendimiento, destacándose por su diseño único y su durabilidad. Con su estructura de cuero premium, paneles de malla y la característica unidad de aire visible en la suela, ofrecen una mezcla perfecta de comodidad y soporte. Las Jordan 4 Retro siguen siendo un símbolo de la cultura sneaker y un básico tanto para coleccionistas como para amantes del baloncesto.",
+        "sku": "NK-JOR4R-CEL",
+        "price": "200000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "genre": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/pe9xn7qgn31u4sn2cznni/NIKE-JORDAN-4-RETRO-CELESTE-1.png?rlkey=pekh3qudj1hjk0iw4u2lovz4b&st=2tnvmdax&raw=1",
+          "https://www.dropbox.com/scl/fi/ogsqru34n4o6sgt0nj6hk/NIKE-JORDAN-4-RETRO-CELESTE-2.png?rlkey=ko3710ygapxnbjghwlf4zt3jh&st=fqi1ickn&raw=1",
+          "https://www.dropbox.com/scl/fi/sbzcv8aqoinvi5x62h5wj/NIKE-JORDAN-4-RETRO-CELESTE-3.png?rlkey=6psgb6noy3dhz5t4bsg26w92z&st=s9npc29c&raw=1",
+          "https://www.dropbox.com/scl/fi/3rekcop45kiefuncnvw8s/NIKE-JORDAN-4-RETRO-CELESTE-4.png?rlkey=2n5kprspc913cx6yi985324n2&st=0347evot&raw=1"
+        ],
+        "discount": 15
+      },
+      {
+        "name": "NIKE PEGASUS - BLACK & BLUE",
+        "brand": {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "Las Nike Pegasus son unas zapatillas de running diseñadas para ofrecer comodidad, durabilidad y una pisada reactiva. Con más de 30 años de evolución, las Pegasus se destacan por su entresuela con espuma Nike React, que proporciona una amortiguación suave y un retorno de energía excepcional. Su parte superior de malla transpirable asegura frescura y soporte durante largas carreras. Ideales tanto para principiantes como para corredores experimentados, las Nike Pegasus son un clásico en el mundo del running gracias a su rendimiento confiable y estilo versátil.",
+        "sku": "NK-PEGASUS-BYB",
+        "price": "122000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "genre": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/gwhd07raxvd6enm2s8i10/NIKE-PEGASUS-BLACK-BLUE-1.png?rlkey=bdspawu8bchrnyv6j9th57d6i&st=079cblrm&raw=1",
+          "https://www.dropbox.com/scl/fi/41rgz0owk07jelyjejr22/NIKE-PEGASUS-BLACK-BLUE-2.png?rlkey=k7x3auuqruh1x7d2isn2v4bt5&st=ya27ouay&raw=1",
+          "https://www.dropbox.com/scl/fi/mubpjg3iy99i54janjwjg/NIKE-PEGASUS-BLACK-BLUE-3.png?rlkey=bqh16p49z3kkvmni2ya0i3ich&st=bvxi92w3&raw=1"
+        ],
+        "discount": 10
+      },
+      {
+        "name": "NIKE PEGASUS - GRAY & PINK",
+        "brand": {
+          "name": "nike",
+          "image":
+            "https://www.dropbox.com/scl/fi/3jv3irfrdfrzze586uazw/nike-120-z-70.png?rlkey=5lkhqpv6rc0izdhjyckoro9yt&st=fwkdans5&raw=1"
+        },
+        "description": 
+        "Las Nike Pegasus son unas zapatillas de running diseñadas para ofrecer comodidad, durabilidad y una pisada reactiva. Con más de 30 años de evolución, las Pegasus se destacan por su entresuela con espuma Nike React, que proporciona una amortiguación suave y un retorno de energía excepcional. Su parte superior de malla transpirable asegura frescura y soporte durante largas carreras. Ideales tanto para principiantes como para corredores experimentados, las Nike Pegasus son un clásico en el mundo del running gracias a su rendimiento confiable y estilo versátil.",
+        "sku": "NK-PEGASUS-GYP",
+        "price": "122000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "genre": "mujer",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/isq6gpu29wshoqznohd9j/NIKE-PEGASUS-GRAY-PINK-1.png?rlkey=ygo39ggzngmq34up9mvwqviru&st=hjpjq0kc&raw=1",
+          "https://www.dropbox.com/scl/fi/jhf9otqr9m8bp7u0oxw48/NIKE-PEGASUS-GRAY-PINK-2.png?rlkey=04c8ackwej5nm93kchyq6ceag&st=aisbtmp4&raw=1",
+          "https://www.dropbox.com/scl/fi/89lxndlcn21wtakt5ljfi/NIKE-PEGASUS-GRAY-PINK-3.png?rlkey=dpz43nx7kba3e80mp3rop5fb2&st=tc1cal58&raw=1"
+        ],
+        "discount": 10
+      },
+      {
+        "name": "Court Cage De Cuero",
+        "brand": {
+          "name": "lacoste",
+          "image":
+            "https://www.dropbox.com/scl/fi/o67vffv91p14zn3zlttu8/LACOSTE-150x150.png?rlkey=jimcpl6uckh985429n27qm13b&st=b3hzb8sr&raw=1"
+        },
+        "description": 
+        "Un calzado inspirado en las pistas y pensado para las calles de la ciudad. Las Court Cage presentan una estética resistente pensada para el aire libre a través de una combinación de piel, ante y detalles reflectantes, mientras que el emblemático cocodrilo aparece bordado en un lado para rematar el diseño.",
+        "sku": "47SMA0050",
+        "price": "205000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "genre": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/ra9uu9ldwmss0dqin675t/Court-Cage-de-Cuero-_1_.png?rlkey=1qm4gcv95su9qbnnh8gtwjjqo&st=vnldqdl1&raw=1",
+          "https://www.dropbox.com/scl/fi/1wa7mco4wiuldgqfx55dq/Court-Cage-de-Cuero-_2_.png?rlkey=ppwvwlw0wdmzb9gckx5k2h67j&st=eofr69sk&raw=1",
+          "https://www.dropbox.com/scl/fi/4fjg4u1dzq82utncrx43l/Court-Cage-de-Cuero-_3_.png?rlkey=38pn9up1bw7vqmdpdnzx2zhbg&st=0f7lj2iu&raw=1",
+          "https://www.dropbox.com/scl/fi/nw26ebwugsv05ytvwzu4s/Court-Cage-de-Cuero-_4_.png?rlkey=uuipppep8xw31xqckw0hd2vrz&st=vgte9wjc&raw=1"
+        ],
+        "discount": 30
+      },
+      {
+        "name": "Aceclip De Cuero",
+        "brand": {
+          "name": "lacoste",
+          "image":
+            "https://www.dropbox.com/scl/fi/o67vffv91p14zn3zlttu8/LACOSTE-150x150.png?rlkey=jimcpl6uckh985429n27qm13b&st=b3hzb8sr&raw=1"
+        },
+        "description": 
+        "Las zapatillas Aceclip, confeccionadas con un empeine de piel suave, presentan una trabilla de ante en el talón, forro de malla, cordones de algodón de estilo vintage y detalles del cocodrilo en relieve que aportan un acabado retro al diseño.",
+        "sku": "LCS-ACECLIP-GYW",
+        "price": "240000",
+        "size": [ "38", "39", "40", "41", "42", "43", "44" ],
+        "genre": "hombre",
+        "stock": 100,
+        "images": [
+          "https://www.dropbox.com/scl/fi/sqrht6z3sh1tj54kpqwnh/Aceclip-De-Cuero-GRN-WHT-_1_.png?rlkey=eytks9yqwz05u22dfhvrsu0ie&st=q9yxw3b2&raw=1",
+          "https://www.dropbox.com/scl/fi/187og3qycmtgj1hgkxgtw/Aceclip-De-Cuero-GRN-WHT-_2_.png?rlkey=i1bypx29yw1rrixy8out9vncz&st=wm9sr9r9&raw=1",
+          "https://www.dropbox.com/scl/fi/glb7h8lx6barq9c9a9ixy/Aceclip-De-Cuero-GRN-WHT-_3_.png?rlkey=1mstw66ees02chey2wmbcdhob&st=yl4eztg5&raw=1",
+          "https://www.dropbox.com/scl/fi/l22753gzzmm0b8uckkjqh/Aceclip-De-Cuero-GRN-WHT-_4_.png?rlkey=i3cvczh6woctsm5m7x9oye6yr&st=zk82wzjr&raw=1"
+        ],
+        "discount": 0
       }
+
     
     ]
