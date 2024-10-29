@@ -143,3 +143,16 @@ nombre-del-repositorio/
 │ 
 ├── README.md                   # Este archivo
 └── .gitignore                  # Archivos y carpetas ignorados por Git
+
+
+## ¿Cuál es el futuro de este proyecto y qué se mejorará?
+
+Este proyecto es muy importante porque establece la base de muchos conceptos clave, tanto en el manejo de **React** como en el uso de herramientas específicas de **Next.js**. Actualmente, se podría considerar como la versión **1.0.0**, y aunque funcional, tiene un gran potencial para mejorar en futuras versiones.
+
+A futuro, tengo planeado realizar varias optimizaciones. Después de revisar en profundidad la documentación de Next.js, creo que puedo mejorar el código para alcanzar una mayor eficiencia y rendimiento. Además, planeo reemplazar **MongoDB** como base de datos, optando en su lugar por **Firebase**, ya que ofrece su propio sistema de autenticación tanto por credenciales como mediante proveedores populares como Facebook y Google, entre otros.
+
+Otra área clave de mejora es la experiencia visual en algunas vistas, como el perfil de usuario (Profile) y el panel de administración (Admin Dashboard). En esta primera versión, el componente de **paginación** funciona bien para productos, pero aún no se ha implementado completamente para los usuarios, por lo que esta mejora será una prioridad en futuras actualizaciones.
+
+El uso de **ShadCN** en este proyecto ha sido fundamental para agilizar los tiempos de desarrollo, lo que me permitió dedicarme más a aprender la teoría y a planear futuras funcionalidades para los componentes. En experiencias previas, nunca había utilizado tantos componentes de esta librería, y en esta ocasión logré explorar una amplia gama de ellos y aprender tanto de su documentación como de su comunidad, lo que me ayudó a comprender mejor las prácticas recomendadas para controlar sus funcionalidades.
+
+Espero que este proyecto refleje mi motivación para seguir aprendiendo y mi disposición a mejorar cada día con el objetivo de llegar a ser un excelente desarrollador.
