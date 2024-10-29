@@ -143,7 +143,7 @@ nombre-del-repositorio/
 │ 
 ├── README.md                   # Este archivo
 └── .gitignore                  # Archivos y carpetas ignorados por Git
-
+```
 
 ## ¿Cuál es el futuro de este proyecto y qué se mejorará?
 
