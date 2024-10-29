@@ -5,9 +5,9 @@ Este proyecto es un sistema de e-commerce enfocado en la venta de zapatillas. El
 ## Descripción del Proyecto
 ### Screenshot
 
-![Home](.cliente/public/screenshots/home.png)
-![Products](.cliente/public/screenshots/products.png)
-![Product-Details](.cliente/public/screenshots/product-detail.png)
+![Home](./cliente/public/screenshots/home.png)
+![Products](./cliente/public/screenshots/products.png)
+![Product-Details](./cliente/public/screenshots/product-detail.png)
 
 ### Servidor (Back end)
 El servidor está construido utilizando **Node.js** y **Express**. Toda la lógica del servidor, incluyendo la gestión de usuarios, productos, órdenes y autenticación, se maneja en esta parte del proyecto. Los datos se almacenan en una base de datos **MongoDB**.
