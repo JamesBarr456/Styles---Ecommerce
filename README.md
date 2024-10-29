@@ -28,7 +28,8 @@ El cliente está desarrollado utilizando **Next.js** (versión 14 o superior). L
 ### Front end:
 - Next.js (14+)
 - React
-- Tailwind CSS (opcional, para el diseño)
+- Tailwind CSS 
+- ShadCn
 
 ## Instalación
 
